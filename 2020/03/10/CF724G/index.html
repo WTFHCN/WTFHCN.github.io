@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="NaCNer">
 <meta property="og:description" content="给定一张图求$u\rightarrow v$所有路径的异或的和(相同的异或当一个）。">
 <meta property="article:published_time" content="2020-03-10T01:28:21.000Z">
-<meta property="article:modified_time" content="2020-03-22T13:22:31.917Z">
+<meta property="article:modified_time" content="2020-03-22T13:26:11.065Z">
 <meta property="article:author" content="HCN">
 <meta property="article:tag" content="线性基">
 <meta name="twitter:card" content="summary">
@@ -304,11 +304,11 @@
         <p>给定一张图求$u\rightarrow v$所有路径的异或的和(相同的异或当一个）。<br><a id="more"></a><br>一条路径由一条链和几个环组成。环可以走也可以不走，就相当于线性基中取几个数。那么对于一条路径就是取$u-v$的一条链和他的环。见 <a href="https://www.luogu.com.cn/problem/P4151" target="_blank" rel="noopener">P4151[WC2011]最大XOR和路径</a>。</p>
 <p>显然不可能所有路径都遍厉过去。考虑一块连通图，那么线性基是共享的。从位考虑贡献</p>
 <ul>
-<li>线性基不存在$i$位,需要链上这位有$1$选中,$num1<em>2^{i}</em>2^{size}$ </li>
-<li>线性基$i$位为$1$,需要链上这位有$0$选中,或者线性基这位不选$num0<em>2^{i}</em>2^{size-1}+num1<em>2^{i}</em>2^{size-1}$ </li>
+<li>线性基不存在$i$位,需要链上这位有$1$选中,$num1\times2^{i}\times2^{size}$ </li>
+<li>线性基$i$位为$1$,需要链上这位有$0$选中,或者线性基这位不选$num0\times2^{i}\times2^{size-1}+num1\times2^{i}\times2^{size-1}$ </li>
 </ul>
-<p>考虑随机从一个点出发$dis[u\rightarrow v]=dis[u]\bigoplus dis[v]$，$num1=sum1*sum2,num2=C(sum1,2)+C(sum2,2)$</p>
-<p>复杂度$O(n+64<em>64+n</em>64)$</p>
+<p>考虑随机从一个点出发$dis[u\rightarrow v]=dis[u]\bigoplus dis[v]$，$num1=sum1\times sum2,num2=C(sum1,2)+C(sum2,2)$</p>
+<p>复杂度$O(n+64^2+64n)$</p>
 <details>
   <summary>代码</summary>
 

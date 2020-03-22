@@ -84,11 +84,11 @@
 <meta name="description" content="E">
 <meta property="og:type" content="article">
 <meta property="og:title" content="E. Antenna Coverage">
-<meta property="og:url" content="http://yoursite.com/2019/11/16/CF1253/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/11/16/CF1253E/index.html">
 <meta property="og:site_name" content="NaCNer">
 <meta property="og:description" content="E">
 <meta property="article:published_time" content="2019-11-16T02:47:00.000Z">
-<meta property="article:modified_time" content="2019-11-17T11:24:52.000Z">
+<meta property="article:modified_time" content="2020-03-22T13:40:14.373Z">
 <meta property="article:author" content="HCN">
 <meta name="twitter:card" content="summary">
 
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/11/16/CF1253/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/11/16/CF1253E/"/>
 
 
 
@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/16/CF1253/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/16/CF1253E/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HCN">
@@ -300,7 +300,13 @@
       
 
       
-        <p>E<br><a id="more"></a><br>E<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> dp[N], x[N], s[N], n, m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;x[i], &amp;s[i]);</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">        dp[i] = i;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (x[j] &gt;= i)</span><br><span class="line">                dp[i] = <span class="built_in">min</span>(dp[i], dp[<span class="built_in">max</span>(x[j] - s[j] - <span class="number">1</span>, <span class="number">0</span>)]);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                dp[i] = <span class="built_in">min</span>(dp[i], dp[<span class="built_in">max</span>(<span class="built_in">min</span>(<span class="number">2</span> * x[j] - i - <span class="number">1</span>, x[j] - s[j] - <span class="number">1</span>), <span class="number">0</span>)] + <span class="built_in">max</span>(<span class="number">0</span>, i - (x[j] + s[j])));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, dp[m]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <p>E<br><a id="more"></a><br>E</p>
+<details>
+  <summary>代码</summary>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> dp[N], x[N], s[N], n, m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;x[i], &amp;s[i]);</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">        dp[i] = i;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (x[j] &gt;= i)</span><br><span class="line">                dp[i] = <span class="built_in">min</span>(dp[i], dp[<span class="built_in">max</span>(x[j] - s[j] - <span class="number">1</span>, <span class="number">0</span>)]);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                dp[i] = <span class="built_in">min</span>(dp[i], dp[<span class="built_in">max</span>(<span class="built_in">min</span>(<span class="number">2</span> * x[j] - i - <span class="number">1</span>, x[j] - s[j] - <span class="number">1</span>), <span class="number">0</span>)] + <span class="built_in">max</span>(<span class="number">0</span>, i - (x[j] + s[j])));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, dp[m]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</details>
+
 
       
     </div>
@@ -325,8 +331,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/16/ECR76/" rel="next" title="Educational Codeforces Round 76 (E-G)">
-                <i class="fa fa-chevron-left"></i> Educational Codeforces Round 76 (E-G)
+              <a href="/2019/11/04/HDU5977/" rel="next" title="HDU5977 树分治">
+                <i class="fa fa-chevron-left"></i> HDU5977 树分治
               </a>
             
           </div>
@@ -335,8 +341,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/11/19/BZOJ2200/" rel="prev" title="BZOJ2200 拓扑排序+最短路">
-                BZOJ2200 拓扑排序+最短路 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/11/16/ECR76/" rel="prev" title="Educational Codeforces Round 76 (E-G)">
+                Educational Codeforces Round 76 (E-G) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

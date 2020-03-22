@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/11/20/EqiMNheuAjp3TgC.png">
 <meta property="og:image" content="https://i.loli.net/2019/10/27/mMeY4HSOJC9TtvK.png">
 <meta property="article:published_time" content="2019-10-27T01:28:21.000Z">
-<meta property="article:modified_time" content="2019-11-23T06:54:50.000Z">
+<meta property="article:modified_time" content="2020-03-22T14:00:56.756Z">
 <meta property="article:author" content="HCN">
 <meta property="article:tag" content="树分治">
 <meta name="twitter:card" content="summary">
@@ -312,19 +312,23 @@
 <p>但是显然$(3+4)$这条路径不符合条件，它是$1-&gt;3-&gt;4与1-&gt;3$配对而成(因为我们需要不同一个子树里的路径互相配对),我们需要将他去掉，只需要在继续搜索子树结点时,再次使用以上方法找到子树的$3$条路径,在答案种减去符合的就好了。</p>
 <p>但是为了退化到一条链的情况或是有个子树特别大：<br>假设当前树的重心为$u$,则整棵树的大小为$size(u)$,对于u的任意儿子v有，$size(v)&lt;=size(u)/2$.<br>也就是说我们每次把重心删除以后，剩下的子树的规模都至少会是源树的一半。如果原来树的大小为$n$,那么递归的层数就会使$log(n)$</p>
 <h2 id="树的重心"><a href="#树的重心" class="headerlink" title="树的重心"></a>树的重心</h2><p><img src="https://i.loli.net/2019/10/27/mMeY4HSOJC9TtvK.png" width="500" hegiht="313" align=center /></p>
-<pre><code class="lang-c++">#include &lt;iostream&gt;
-#include &lt;queue&gt;
-#include &lt;vector&gt;
-#include&lt;cstring&gt;
-#include&lt;algorithm&gt;
-#include&lt;cstdio&gt;
+<details>
+  <summary>模版</summary>
+
+```c++
+#include <iostream>
+#include <queue>
+#include <vector>
+#include<cstring>
+#include<algorithm>
+#include<cstdio>
 using namespace std;
 #define inf 0x7fffffff
 const int N = 1e5 + 10;
 struct node
 {
     int to, w, next;
-} e[N &lt;&lt; 1];
+} e[N << 1];
 int head[N], cnt, n, k, d[N], deep[N];
 int num, ans, f[N], son[N], vis[N], root, sum;
 void addedge(int u, int v, int w)
@@ -347,7 +351,7 @@ void getroot(int x, int fa)
         f[x] = max(f[x], son[e[i].to]);
     }
     f[x] = max(f[x], sum - son[x]);
-    if (f[x] &lt; f[root])
+    if (f[x] < f[root])
         root = x;
 }
 void getdeep(int x, int fa)
@@ -355,7 +359,7 @@ void getdeep(int x, int fa)
     deep[++num] = d[x];
 
     for (int i = head[x]; i; i = e[i].next)
-        if (e[i].to != fa &amp;&amp; !vis[e[i].to])
+        if (e[i].to != fa && !vis[e[i].to])
         {
             d[e[i].to] = d[x] + e[i].w;
             getdeep(e[i].to, x);
@@ -369,9 +373,9 @@ int calc(int x, int now)
     getdeep(x, 0);
     sort(deep + 1, deep + 1 + num);
     int l = 1, r = num;
-    while (l &lt; r)
+    while (l < r)
     {
-        if (deep[l] + deep[r] &lt;= k)
+        if (deep[l] + deep[r] <= k)
             st += r - l, l++;
        else  r--;
     }
@@ -393,7 +397,7 @@ void slove(int x)
 }
 int main()
 {
-    while (scanf(&quot;%d%d&quot;, &amp;n, &amp;k) != EOF &amp;&amp; n &amp;&amp; k)
+    while (scanf("%d%d", &n, &k) != EOF && n && k)
     {
         ans = 0;
         root = 0;
@@ -402,31 +406,39 @@ int main()
         f[0] = inf;
         memset(vis, 0, sizeof(vis));
         memset(head, 0, sizeof(head));
-        for (int i = 1; i &lt; n; i++)
+        for (int i = 1; i < n; i++)
         {
             int u, v, w;
-            scanf(&quot;%d%d%d&quot;, &amp;u, &amp;v, &amp;w);
+            scanf("%d%d%d", &u, &v, &w);
             addedge(u, v, w);
             addedge(v, u, w);
         }
         getroot(1, 0);
         slove(root);
-        printf(&quot;%d\n&quot;, ans);
+        printf("%d\n", ans);
     }
 }
-</code></pre>
-<h2 id="POJ-1655"><a href="#POJ-1655" class="headerlink" title="POJ 1655"></a>POJ 1655</h2><h2 id="找重心"><a href="#找重心" class="headerlink" title="找重心"></a>找重心</h2><pre><code class="lang-c++">#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;vector&gt;
-#include &lt;cmath&gt;
-#include&lt;cstring&gt;
+``` 
+</details>
+
+
+
+<h4 id="POJ-1655"><a href="#POJ-1655" class="headerlink" title="POJ 1655"></a>POJ 1655</h4><details>
+  <summary>树的重心</summary>
+
+```c++
+#include <iostream>
+#include <cstdio>
+#include <vector>
+#include <cmath>
+#include<cstring>
 using namespace std;
 #define inf 0x7fffffff
 const int N = 2e5 + 10;
 struct node
 {
     int to, next, w;
-} e[N &lt;&lt; 1];
+} e[N << 1];
 int head[N], n, cnt, si[N];
 int rootsiz, root;
 void init()
@@ -455,7 +467,7 @@ void getroot(int x, int fa)
             si[x] += si[e[i].to];
         }
     tmp = max(tmp, n - si[x]);
-    if (tmp &lt; rootsiz || (tmp == rootsiz &amp;&amp; x &lt; root))
+    if (tmp < rootsiz || (tmp == rootsiz && x < root))
     {
         root = x;
         rootsiz = tmp;
@@ -464,23 +476,25 @@ void getroot(int x, int fa)
 int T;
 int main()
 {
-    scanf(&quot;%d&quot;, &amp;T);
+    scanf("%d", &T);
     while (T--)
     {
         init();
-        scanf(&quot;%d&quot;, &amp;n);
-        for (int i = 1; i &lt; n; i++)
+        scanf("%d", &n);
+        for (int i = 1; i < n; i++)
         {
             int u, v;
-            scanf(&quot;%d%d&quot;, &amp;u, &amp;v);
+            scanf("%d%d", &u, &v);
             addedge(u, v, 1);
             addedge(v, u, 1);
         }
         getroot(1, 0);
-        printf(&quot;%d %d\n&quot;, root, rootsiz);
+        printf("%d %d\n", root, rootsiz);
     }
 }
-</code></pre>
+``` 
+</details>
+
 
       
     </div>
@@ -657,7 +671,7 @@ int main()
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#树分治"><span class="nav-number">1.</span> <span class="nav-text">树分治</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树的重心"><span class="nav-number">2.</span> <span class="nav-text">树的重心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POJ-1655"><span class="nav-number">3.</span> <span class="nav-text">POJ 1655</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#找重心"><span class="nav-number">4.</span> <span class="nav-text">找重心</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#树分治"><span class="nav-number">1.</span> <span class="nav-text">树分治</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树的重心"><span class="nav-number">2.</span> <span class="nav-text">树的重心</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#POJ-1655"><span class="nav-number">2.0.1.</span> <span class="nav-text">POJ 1655</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
