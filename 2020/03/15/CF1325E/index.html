@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="NaCNer">
 <meta property="og:description" content="给一个长度为$n$的数组，每个数最多有7个因数，从中取$len$个数，使他们的乘积是平方数，求最小$len$。">
 <meta property="article:published_time" content="2020-03-15T04:14:13.000Z">
-<meta property="article:modified_time" content="2020-03-22T13:48:14.286Z">
+<meta property="article:modified_time" content="2020-03-27T15:35:54.731Z">
 <meta property="article:author" content="HCN">
 <meta property="article:tag" content="图论">
 <meta name="twitter:card" content="summary">
@@ -306,7 +306,7 @@
       
 
       
-        <p>给一个长度为$n$的数组，每个数最多有7个因数，从中取$len$个数，使他们的乘积是平方数，求最小$len$。<br><a id="more"></a><br>考虑到因数格式。所以$a_i=p^x<em>q^y$或者$a_i=p^x$<br>且$q^x=q^{x\%2}$,如果是平方数那么就是一定是$(p</em>q)<em>(q</em>z)<em>(z</em>p),(1<em>p)</em>(p<em>q)</em>(q*1)$.那么将$p-q$连接起来或者$1-p$连接起来。当构成一个环就可以构成平方数。求一个最小环($n^2$),又因为环里一定存在$p\leq\sqrt {a_i}$。只需要搜索$\sqrt {a_i}$个点。</p>
+        <p>给一个长度为$n$的数组，每个数最多有7个因数，从中取$len$个数，使他们的乘积是平方数，求最小$len$。<br><a id="more"></a><br>考虑到因数格式。所以$a_i=p^x*q^y$或者$a_i=p^x$<br>且$q^x=q^{x\%2}$,如果是平方数那么就是一定是$(p\times q)\times (q\times z)\times (z\times p),(1\times p)\times (p\times q)\times (q\times 1)$.那么将$p-q$连接起来或者$1-p$连接起来。当构成一个环就可以构成平方数。求一个最小环($n^2$),又因为环里一定存在$p\leq\sqrt {a_i}$。只需要搜索$\sqrt {a_i}$个点。</p>
 <p>时间复杂度$O(MAX(a_i))$</p>
 <details>
   <summary>代码</summary>
@@ -427,7 +427,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">78</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -440,7 +440,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -463,6 +463,24 @@
           
 
           
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/Isaunoya/" title="Isaunoya" target="_blank">Isaunoya</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://sher-wu.github.io/" title="sher-wu" target="_blank">sher-wu</a>
+                  </li>
+                
+              </ul>
+            </div>
           
 
           
