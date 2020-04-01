@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="数论," />
+  <meta name="keywords" content="数学," />
 
 
 
@@ -81,16 +81,16 @@
 
 
 
-<meta name="description" content="数学之美已经超越算法本身，卷积部分待更新">
+<meta name="description" content="$n\times m$的方格，每个可以放$[L,R]$个方块。有两种操作  给某个$+2$ 给相邻$+1,+1$  求无限次操作完可以同高度的小木块的放置方案数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="卡特兰数,第一类斯特林数，第二类斯特林数">
-<meta property="og:url" content="http://yoursite.com/2020/11/30/%E7%AC%AC%E4%B8%80%E5%92%8C%E7%AC%AC%E4%BA%8C%E7%B1%BB%E6%96%AF%E7%89%B9%E6%9E%97%E6%95%B0/index.html">
+<meta property="og:title" content="1332E - Height All the Same">
+<meta property="og:url" content="http://yoursite.com/2020/04/01/CF1332E/index.html">
 <meta property="og:site_name" content="NaCNer">
-<meta property="og:description" content="数学之美已经超越算法本身，卷积部分待更新">
-<meta property="article:published_time" content="2020-11-30T04:14:13.000Z">
-<meta property="article:modified_time" content="2020-03-17T14:47:18.000Z">
+<meta property="og:description" content="$n\times m$的方格，每个可以放$[L,R]$个方块。有两种操作  给某个$+2$ 给相邻$+1,+1$  求无限次操作完可以同高度的小木块的放置方案数">
+<meta property="article:published_time" content="2020-04-01T01:47:00.000Z">
+<meta property="article:modified_time" content="2020-04-01T10:27:17.401Z">
 <meta property="article:author" content="HCN">
-<meta property="article:tag" content="数论">
+<meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/11/30/第一和第二类斯特林数/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/04/01/CF1332E/"/>
 
 
 
 
 
-  <title>卡特兰数,第一类斯特林数，第二类斯特林数 | NaCNer</title>
+  <title>1332E - Height All the Same | NaCNer</title>
   
 
 
@@ -234,7 +234,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/30/%E7%AC%AC%E4%B8%80%E5%92%8C%E7%AC%AC%E4%BA%8C%E7%B1%BB%E6%96%AF%E7%89%B9%E6%9E%97%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/01/CF1332E/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HCN">
@@ -251,7 +251,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">卡特兰数,第一类斯特林数，第二类斯特林数</h1>
+          <h1 class="post-title" itemprop="name headline">1332E - Height All the Same</h1>
         
 
         <div class="post-meta">
@@ -263,8 +263,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-30T12:14:13+08:00">
-                2020-11-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-01T09:47:00+08:00">
+                2020-04-01
               </time>
             
 
@@ -306,55 +306,22 @@
       
 
       
-        <p>数学之美已经超越算法本身，卷积部分待更新</p>
-<a id="more"></a>
-<p><a href="[链接网址](https://www.cnblogs.com/gzy-cjoier/p/8426987.html">大佬1</a> “学习”)</p>
-<p><a href="[链接网址](https://www.cnblogs.com/zhouzhendong/p/Stirling-Number.html">大佬2</a> “学习”)</p>
-<p><a href="[链接网址](https://zhuanlan.zhihu.com/p/51391350">大佬3</a> “学习”)</p>
-<h2 id="卡特兰数"><a href="#卡特兰数" class="headerlink" title="卡特兰数"></a>卡特兰数</h2><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>$C(n)$表示从原点出发，每次向$x$或$y$轴正方向移动$1$单位，到达点$(n,n)$，且在移动过程中不越过第一象限平分线的移动方案数。</p>
-<h4 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h4><p>总的方案数：$C(2n,n)$</p>
-<p>第一次超越对角线的点$P$,到终点$（n,n）$的路径沿（$y=x+1$）对称</p>
-<p>不合理的方案数：第一象限$(0,0)\rightarrow(n-1,n+1)$<br>,$C(2n,n+1)$</p>
-<p>或者对于$0011010101$,任意位置$\sum1 \geq \sum0$,不合理的方案必定存在有个位置$\sum1 +1 = \sum0$ 我们这个位置及之前$1,0变换$，就是$n+1$个$1$,$n-1$个$0$，保证了有位置$\sum0&lt;\sum1$，反向变换之后又保证$0,1$个数相同。</p>
-<script type="math/tex; mode=display">
-    C(n)=\frac{1}{n+1}C_{2n}^n，
-    C(n)=\frac{4n+2}{n+1}C(n-1)\\</script><blockquote>
-<p>1, 1, 2, 5, 14, 42, 132, 429,</p>
-</blockquote>
+        <p>$n\times m$的方格，每个可以放$[L,R]$个方块。有两种操作</p>
 <ul>
-<li>$n$对括号的合法配对方案书</li>
-<li>$n$个节点的二叉树的形态数</li>
-<li>$n+1$个叶子($n$个非叶节点)的满二叉树的形态数, 走到左儿子$+1$,走到 右儿子$-1$,类似于括号匹配(大致同2)</li>
-<li>$n$个数入栈后出栈的排列总数</li>
-<li>对凸$n+2$边形进行不同的三角形分割的方案数(分割线断点仅为顶点，且分割线仅在顶点上相交)</li>
-<li>$n$层的阶梯切割为$n$个矩形的切法数</li>
+<li>给某个$+2$</li>
+<li>给相邻$+1,+1$</li>
 </ul>
-<hr>
-<h2 id="第一类斯特林数"><a href="#第一类斯特林数" class="headerlink" title="第一类斯特林数"></a>第一类斯特林数</h2><h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h4><p>$s(n,m)$将 $n$ 个元素划分为 $m$ 个圆排列的方案数。</p>
-<script type="math/tex; mode=display">
-s(n,m)=s(n-1,m-1)+(n-1)*s(n-1,m)\\
-n!=\sum_{i=0}^ns(n,i)</script><hr>
-<h2 id="第二类斯特林数"><a href="#第二类斯特林数" class="headerlink" title="第二类斯特林数"></a>第二类斯特林数</h2><h4 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h4><p>第二类斯特林数$S(n,m)$表示的是把$n$个不同的小球放在$m$个相同的盒子里方案数，或是把$n$个元素分$m$堆集合。(盒子集合不能为空,$m&gt;=n$)</p>
-<p>我们也用$\begin {Bmatrix} n \\ m\end {Bmatrix}$来表示$S(n,m)$</p>
-<p>考虑第$n$个元素,可以单独在一个盒子$S(n-1,m-1)\rightarrow S(n,m)$,或者加入原有集合中$S(n,m-1)\rightarrow S(n,m)$有$m$种加法。</p>
-<script type="math/tex; mode=display">
-    S(n,m)=S(n-1,m-1)+mS(n,m-1)</script><p>考虑$n$个不同球，放到$m$个不同盒子可以空盒子$=m^n$</p>
-<p>$n$个不同球，放到$m$个不同盒子不能有空盒子$=m^n-$(一定有空盒子的)</p>
-<p>$n$个不同球，放到$m$个不同盒子至少有一个空盒子$C(m,1)*(m-1)^n$,这样计算是有重复(比如选1后2也是空，选2后1也是空)，就需要用到容斥原理。</p>
-<p>$k$个为空盒子。</p>
-<script type="math/tex; mode=display">
-    \left|\bigcap_{i=1}^{k} S_{a_i}\right|= (m-k)^n</script><p>那么选择$k$个元素的方案数为 $C(m,k)$</p>
-<p>无空盒子$=m^n-\sum_{i=1}^m (-1)^{i+1} C(m,k)*(m-i)^n$</p>
-<p>不同盒子$\rightarrow$相同盒子$*\frac{1}{m!}$</p>
-<p>通项公式</p>
-<script type="math/tex; mode=display">
-S(n,m)={\frac 1 {m!}}\sum_{k=0}^m (-1)^k C(m,k)(m-k)^n</script><p>$x^{\underline k}$是$x$的$k$次下降幂 </p>
-<script type="math/tex; mode=display">{n\choose i }=\frac{n^{\underline i}}{i!}</script><p>$k$个不同求放在$x$个不同盒子里，每个球有$x$种选择，即$x^k$。</p>
-<p>或是枚举有多少非空盒子$C(n,i)$,对于那么些盒子方案数为$i!*S(k,i)$。</p>
-<script type="math/tex; mode=display">
-    x^k= \sum_{i=0}^{k}{x \choose i} i!\begin{Bmatrix}
-        k \\ i
-    \end{Bmatrix}</script>
+<p>求无限次操作完可以同高度的小木块的放置方案数<br><a id="more"></a><br>比赛时脑抽。每个小方块$+2$，其实最后相差$0,1$。可以用$1,0$表示所有高度小方块。$10\rightarrow 01,00\rightarrow 11$。</p>
+<ul>
+<li>如果$n*m\%2==1$ ，一定有个$1$或$0$的个数为偶数，随便放即可。</li>
+<li>如果$n<em>m\%2==0$ ，$1$和$0$的个数必须为偶数，(奇数参考$01$)，随便放即可。即$C_{n</em>m}^{2*k}(x0)^{2k}(x1)^{n-2k}=\frac{(x1+x0)^n-(x1-x0)^n}{2}$</li>
+<li>快速幂还是用$long long$，被卡常再换回来吧。</li>
+</ul>
+<details>
+  <summary>代码</summary>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pii pair<span class="meta-string">&lt;int, int&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mk make_pair</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e6</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">998244353</span>;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">qpow</span><span class="params">(ll a, ll x, ll mo)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (x)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (x &amp; <span class="number">1</span>)</span><br><span class="line">            res = <span class="number">1l</span>l * res * a % mo;</span><br><span class="line">        a = <span class="number">1l</span>l * a * a % mo;</span><br><span class="line">        x &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line">ll n, m, R, L;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &gt;&gt; L &gt;&gt; R;</span><br><span class="line">    <span class="keyword">if</span> (L == R)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">"1"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ll k = R - L;</span><br><span class="line">    ll p = n * m;</span><br><span class="line">    ll x = (R - L + <span class="number">1</span>);</span><br><span class="line">    ll inv2 = qpow(<span class="number">2</span>, mod - <span class="number">2</span>, mod);</span><br><span class="line">    ll ans;</span><br><span class="line">    <span class="keyword">if</span> ((n * m) % <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        ans = <span class="number">1l</span>l * qpow(x, p, mod) % mod;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (x % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">        ans = <span class="number">1l</span>l * qpow(x, p, mod) * inv2 % mod;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        ans = <span class="number">1l</span>l * (qpow(x, p, mod) + <span class="number">1</span>) * inv2 % mod;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  </details>
       
     </div>
     
@@ -371,7 +338,7 @@ S(n,m)={\frac 1 {m!}}\sum_{k=0}^m (-1)^k C(m,k)(m-k)^n</script><p>$x^{\underline
       
         <div class="post-tags">
           
-            <a href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag"># 数论</a>
+            <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
           
         </div>
       
@@ -384,8 +351,8 @@ S(n,m)={\frac 1 {m!}}\sum_{k=0}^m (-1)^k C(m,k)(m-k)^n</script><p>$x^{\underline
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/09/18/min25%E7%AD%9B/" rel="next" title="min25筛">
-                <i class="fa fa-chevron-left"></i> min25筛
+              <a href="/2020/03/27/CF372C/" rel="next" title="CF372C - Watching Fireworks is Fun">
+                <i class="fa fa-chevron-left"></i> CF372C - Watching Fireworks is Fun
               </a>
             
           </div>
@@ -394,8 +361,8 @@ S(n,m)={\frac 1 {m!}}\sum_{k=0}^m (-1)^k C(m,k)(m-k)^n</script><p>$x^{\underline
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2099/01/01/%E6%9D%BF%E5%AD%90/" rel="prev" title="各类板子">
-                各类板子 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/09/18/min25%E7%AD%9B/" rel="prev" title="min25筛">
+                min25筛 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -448,17 +415,8 @@ S(n,m)={\frac 1 {m!}}\sum_{k=0}^m (-1)^k C(m,k)(m-k)^n</script><p>$x^{\underline
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -477,7 +435,7 @@ S(n,m)={\frac 1 {m!}}\sum_{k=0}^m (-1)^k C(m,k)(m-k)^n</script><p>$x^{\underline
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">80</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -490,7 +448,7 @@ S(n,m)={\frac 1 {m!}}\sum_{k=0}^m (-1)^k C(m,k)(m-k)^n</script><p>$x^{\underline
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -538,22 +496,6 @@ S(n,m)={\frac 1 {m!}}\sum_{k=0}^m (-1)^k C(m,k)(m-k)^n</script><p>$x^{\underline
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#卡特兰数"><span class="nav-number">1.</span> <span class="nav-text">卡特兰数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">1.0.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#推导"><span class="nav-number">1.0.2.</span> <span class="nav-text">推导</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一类斯特林数"><span class="nav-number">2.</span> <span class="nav-text">第一类斯特林数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义-1"><span class="nav-number">2.0.1.</span> <span class="nav-text">定义</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二类斯特林数"><span class="nav-number">3.</span> <span class="nav-text">第二类斯特林数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义-2"><span class="nav-number">3.0.1.</span> <span class="nav-text">定义</span></a></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
