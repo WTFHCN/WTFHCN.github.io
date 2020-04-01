@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="学习笔记," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -81,20 +81,12 @@
 
 
 
-<meta name="description" content="题意：给出一棵树，求出树上距离不超过$k$的点对数量。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="点分治">
-<meta property="og:url" content="http://yoursite.com/2019/10/27/%E6%A0%91%E5%88%86%E6%B2%BB/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="NaCNer">
+<meta property="og:url" content="http://yoursite.com/page/9/index.html">
 <meta property="og:site_name" content="NaCNer">
-<meta property="og:description" content="题意：给出一棵树，求出树上距离不超过$k$的点对数量。">
-<meta property="og:image" content="https://i.loli.net/2019/11/20/EqiMNheuAjp3TgC.png">
-<meta property="og:image" content="https://i.loli.net/2019/10/27/mMeY4HSOJC9TtvK.png">
-<meta property="article:published_time" content="2019-10-27T01:28:21.000Z">
-<meta property="article:modified_time" content="2020-04-01T10:27:58.969Z">
 <meta property="article:author" content="HCN">
-<meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2019/11/20/EqiMNheuAjp3TgC.png">
 
 
 
@@ -124,13 +116,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/10/27/树分治/"/>
+  <link rel="canonical" href="http://yoursite.com/page/9/"/>
 
 
 
 
 
-  <title>点分治 | NaCNer</title>
+  <title>NaCNer</title>
   
 
 
@@ -149,7 +141,8 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -222,9 +215,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -237,7 +230,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/27/%E6%A0%91%E5%88%86%E6%B2%BB/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/13/ICPC%E5%BE%90%E5%B7%9E%E7%BD%91%E7%BB%9C%E8%B5%9BI/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HCN">
@@ -254,7 +247,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">点分治</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/13/ICPC%E5%BE%90%E5%B7%9E%E7%BD%91%E7%BB%9C%E8%B5%9BI/" itemprop="url">ICPC徐州网络赛I.query</a></h1>
         
 
         <div class="post-meta">
@@ -266,8 +261,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-27T09:28:21+08:00">
-                2019-10-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-13T14:07:43+08:00">
+                2019-09-13
               </time>
             
 
@@ -285,11 +280,6 @@
           
           
 
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-            </span>
           
 
           
@@ -309,198 +299,16 @@
       
 
       
-        <p>题意：<br>给出一棵树，求出树上距离不超过$k$的点对数量。<br><a id="more"></a></p>
-<h2 id="树分治"><a href="#树分治" class="headerlink" title="树分治"></a>树分治</h2><p><img src="https://i.loli.net/2019/11/20/EqiMNheuAjp3TgC.png" width="500" hegiht="313" align=center /></p>
-<p>对于一棵子树，满足条件的路径包括(经过根的路径，和子树里的路径)! </p>
-<p>所以我先以它的根为起点，向下搜索，等到路途的$5$条路径长度$dis[5]$，假设$k=7$,通过$5$条路径的配对有$(2,3,4,5,6,7)$:</p>
-<p>排序后，建立双指针$l=1,r=5$,若$a[l]+a[r]\leq k$则$(l,r]$里都成立。这样就只要$O(nlogn+n)$就可以实现找合理路径。</p>
-<p>但是显然$(3+4)$这条路径不符合条件，它是$1-&gt;3-&gt;4与1-&gt;3$配对而成(因为我们需要不同一个子树里的路径互相配对),我们需要将他去掉，只需要在继续搜索子树结点时,再次使用以上方法找到子树的$3$条路径,在答案种减去符合的就好了。</p>
-<p>但是为了退化到一条链的情况或是有个子树特别大：<br>假设当前树的重心为$u$,则整棵树的大小为$size(u)$,对于u的任意儿子v有，$size(v)&lt;=size(u)/2$.<br>也就是说我们每次把重心删除以后，剩下的子树的规模都至少会是源树的一半。如果原来树的大小为$n$,那么递归的层数就会使$log(n)$</p>
-<h2 id="树的重心"><a href="#树的重心" class="headerlink" title="树的重心"></a>树的重心</h2><p><img src="https://i.loli.net/2019/10/27/mMeY4HSOJC9TtvK.png" width="500" hegiht="313" align=center /></p>
-<details>
-  <summary>模版</summary>
-
-```c++
-#include <iostream>
-#include <queue>
-#include <vector>
-#include<cstring>
-#include<algorithm>
-#include<cstdio>
-using namespace std;
-#define inf 0x7fffffff
-const int N = 1e5 + 10;
-struct node
-{
-    int to, w, next;
-} e[N << 1];
-int head[N], cnt, n, k, d[N], deep[N];
-int num, ans, f[N], son[N], vis[N], root, sum;
-void addedge(int u, int v, int w)
-{
-    e[++cnt].to = v;
-    e[cnt].w = w;
-    e[cnt].next = head[u];
-    head[u] = cnt;
-}
-void getroot(int x, int fa)
-{
-    son[x] = 1;
-    f[x] = 0;
-    for (int i = head[x]; i; i = e[i].next)
-    {
-        if (e[i].to == fa || vis[e[i].to])
-            continue;
-        getroot(e[i].to, x);
-        son[x] += son[e[i].to];
-        f[x] = max(f[x], son[e[i].to]);
-    }
-    f[x] = max(f[x], sum - son[x]);
-    if (f[x] < f[root])
-        root = x;
-}
-void getdeep(int x, int fa)
-{
-    deep[++num] = d[x];
-
-    for (int i = head[x]; i; i = e[i].next)
-        if (e[i].to != fa && !vis[e[i].to])
-        {
-            d[e[i].to] = d[x] + e[i].w;
-            getdeep(e[i].to, x);
-        }
-}
-int calc(int x, int now)
-{
-    int st = 0;
-    d[x] = now;
-    num = 0;
-    getdeep(x, 0);
-    sort(deep + 1, deep + 1 + num);
-    int l = 1, r = num;
-    while (l < r)
-    {
-        if (deep[l] + deep[r] <= k)
-            st += r - l, l++;
-       else  r--;
-    }
-    return st;
-}
-void slove(int x)
-{
-    ans += calc(x, 0);
-    vis[x] = 1;
-    for (int i = head[x]; i; i = e[i].next)
-        if (!vis[e[i].to])
-        {
-            ans -= calc(e[i].to, e[i].w);
-            sum = son[e[i].to];
-            root = 0;
-            getroot(e[i].to, root);
-            slove(root);
-        }
-}
-int main()
-{
-    while (scanf("%d%d", &n, &k) != EOF && n && k)
-    {
-        ans = 0;
-        root = 0;
-        cnt = 0;
-        sum = n;
-        f[0] = inf;
-        memset(vis, 0, sizeof(vis));
-        memset(head, 0, sizeof(head));
-        for (int i = 1; i < n; i++)
-        {
-            int u, v, w;
-            scanf("%d%d%d", &u, &v, &w);
-            addedge(u, v, w);
-            addedge(v, u, w);
-        }
-        getroot(1, 0);
-        slove(root);
-        printf("%d\n", ans);
-    }
-}
-``` 
-</details>
-
-
-
-<h4 id="POJ-1655"><a href="#POJ-1655" class="headerlink" title="POJ 1655"></a>POJ 1655</h4><details>
-  <summary>树的重心</summary>
-
-```c++
-#include <iostream>
-#include <cstdio>
-#include <vector>
-#include <cmath>
-#include<cstring>
-using namespace std;
-#define inf 0x7fffffff
-const int N = 2e5 + 10;
-struct node
-{
-    int to, next, w;
-} e[N << 1];
-int head[N], n, cnt, si[N];
-int rootsiz, root;
-void init()
-{
-    cnt = 0;
-    memset(head, 0, sizeof(head));
-    root = inf;
-    rootsiz = inf;
-}
-void addedge(int u, int v, int w)
-{
-    e[++cnt].to = v;
-    e[cnt].w = w;
-    e[cnt].next = head[u];
-    head[u] = cnt;
-}
-void getroot(int x, int fa)
-{
-    si[x] = 1;
-    int tmp = 0;
-    for (int i = head[x]; i; i = e[i].next)
-        if (e[i].to != fa)
-        {
-            getroot(e[i].to, x);
-            tmp = max(tmp, si[e[i].to]);
-            si[x] += si[e[i].to];
-        }
-    tmp = max(tmp, n - si[x]);
-    if (tmp < rootsiz || (tmp == rootsiz && x < root))
-    {
-        root = x;
-        rootsiz = tmp;
-    }
-}
-int T;
-int main()
-{
-    scanf("%d", &T);
-    while (T--)
-    {
-        init();
-        scanf("%d", &n);
-        for (int i = 1; i < n; i++)
-        {
-            int u, v;
-            scanf("%d%d", &u, &v);
-            addedge(u, v, 1);
-            addedge(v, u, 1);
-        }
-        getroot(1, 0);
-        printf("%d %d\n", root, rootsiz);
-    }
-}
-``` 
-</details>
-
-
+        
+          <h3 id="题意："><a href="#题意：" class="headerlink" title="题意："></a>题意：</h3><p>题意好懂，给定一个序列，查询[L,R]之间有多少对<script type="math/tex">a[i]|a[j]</script><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/09/13/ICPC%E5%BE%90%E5%B7%9E%E7%BD%91%E7%BB%9C%E8%B5%9BI/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
     
@@ -515,40 +323,14 @@ int main()
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
-          
-        </div>
+
+      
+
       
 
       
       
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/10/15/ICPC%E5%8D%97%E6%98%8C%E7%BD%91%E7%BB%9C%E8%B5%9BI/" rel="next" title="ICPC南昌网络赛I.Yukino With Subinterval">
-                <i class="fa fa-chevron-left"></i> ICPC南昌网络赛I.Yukino With Subinterval
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/11/04/HDU5977/" rel="prev" title="HDU5977 树分治">
-                HDU5977 树分治 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -558,11 +340,14 @@ int main()
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/8/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span>
+  </nav>
+
 
 
           </div>
@@ -570,10 +355,6 @@ int main()
 
 
           
-
-  
-
-
 
         </div>
         
@@ -594,17 +375,8 @@ int main()
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -684,22 +456,6 @@ int main()
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#树分治"><span class="nav-number">1.</span> <span class="nav-text">树分治</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树的重心"><span class="nav-number">2.</span> <span class="nav-text">树的重心</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#POJ-1655"><span class="nav-number">2.0.1.</span> <span class="nav-text">POJ 1655</span></a></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -869,10 +625,6 @@ int main()
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 

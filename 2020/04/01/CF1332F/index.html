@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="学习笔记," />
+  <meta name="keywords" content="树形dp," />
 
 
 
@@ -81,20 +81,17 @@
 
 
 
-<meta name="description" content="题意：给出一棵树，求出树上距离不超过$k$的点对数量。">
+<meta name="description" content="给一棵树选取某几个点，每个点必须有边，但不需要联通，选择其中某些点$0$，使他们成为独立集。（即之间没有连边）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="点分治">
-<meta property="og:url" content="http://yoursite.com/2019/10/27/%E6%A0%91%E5%88%86%E6%B2%BB/index.html">
+<meta property="og:title" content="1332F - Independent Set">
+<meta property="og:url" content="http://yoursite.com/2020/04/01/CF1332F/index.html">
 <meta property="og:site_name" content="NaCNer">
-<meta property="og:description" content="题意：给出一棵树，求出树上距离不超过$k$的点对数量。">
-<meta property="og:image" content="https://i.loli.net/2019/11/20/EqiMNheuAjp3TgC.png">
-<meta property="og:image" content="https://i.loli.net/2019/10/27/mMeY4HSOJC9TtvK.png">
-<meta property="article:published_time" content="2019-10-27T01:28:21.000Z">
-<meta property="article:modified_time" content="2020-04-01T10:27:58.969Z">
+<meta property="og:description" content="给一棵树选取某几个点，每个点必须有边，但不需要联通，选择其中某些点$0$，使他们成为独立集。（即之间没有连边）">
+<meta property="article:published_time" content="2020-04-01T02:47:00.000Z">
+<meta property="article:modified_time" content="2020-04-01T10:32:15.666Z">
 <meta property="article:author" content="HCN">
-<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="树形dp">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2019/11/20/EqiMNheuAjp3TgC.png">
 
 
 
@@ -124,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/10/27/树分治/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/04/01/CF1332F/"/>
 
 
 
 
 
-  <title>点分治 | NaCNer</title>
+  <title>1332F - Independent Set | NaCNer</title>
   
 
 
@@ -237,7 +234,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/27/%E6%A0%91%E5%88%86%E6%B2%BB/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/01/CF1332F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HCN">
@@ -254,7 +251,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">点分治</h1>
+          <h1 class="post-title" itemprop="name headline">1332F - Independent Set</h1>
         
 
         <div class="post-meta">
@@ -266,8 +263,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-27T09:28:21+08:00">
-                2019-10-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-01T10:47:00+08:00">
+                2020-04-01
               </time>
             
 
@@ -309,198 +306,23 @@
       
 
       
-        <p>题意：<br>给出一棵树，求出树上距离不超过$k$的点对数量。<br><a id="more"></a></p>
-<h2 id="树分治"><a href="#树分治" class="headerlink" title="树分治"></a>树分治</h2><p><img src="https://i.loli.net/2019/11/20/EqiMNheuAjp3TgC.png" width="500" hegiht="313" align=center /></p>
-<p>对于一棵子树，满足条件的路径包括(经过根的路径，和子树里的路径)! </p>
-<p>所以我先以它的根为起点，向下搜索，等到路途的$5$条路径长度$dis[5]$，假设$k=7$,通过$5$条路径的配对有$(2,3,4,5,6,7)$:</p>
-<p>排序后，建立双指针$l=1,r=5$,若$a[l]+a[r]\leq k$则$(l,r]$里都成立。这样就只要$O(nlogn+n)$就可以实现找合理路径。</p>
-<p>但是显然$(3+4)$这条路径不符合条件，它是$1-&gt;3-&gt;4与1-&gt;3$配对而成(因为我们需要不同一个子树里的路径互相配对),我们需要将他去掉，只需要在继续搜索子树结点时,再次使用以上方法找到子树的$3$条路径,在答案种减去符合的就好了。</p>
-<p>但是为了退化到一条链的情况或是有个子树特别大：<br>假设当前树的重心为$u$,则整棵树的大小为$size(u)$,对于u的任意儿子v有，$size(v)&lt;=size(u)/2$.<br>也就是说我们每次把重心删除以后，剩下的子树的规模都至少会是源树的一半。如果原来树的大小为$n$,那么递归的层数就会使$log(n)$</p>
-<h2 id="树的重心"><a href="#树的重心" class="headerlink" title="树的重心"></a>树的重心</h2><p><img src="https://i.loli.net/2019/10/27/mMeY4HSOJC9TtvK.png" width="500" hegiht="313" align=center /></p>
+        <p>给一棵树选取某几个点，<strong>每个点必须有边，但不需要联通</strong>，选择其中某些点$0$，使他们成为独立集。（即之间没有连边）<br><a id="more"></a><br>$dp[x][0]$表示$x$在集合中，填$0$,$x$这棵子树的方案数</p>
+<p>$dp[x][1]$表示$x$在集合中，填$1$,$x$这棵子树的方案数</p>
+<p>$dp[x][2]$表示$x$不在集合中,$x$这棵子树的方案数。、</p>
+<p>考虑一棵树$x$</p>
+<ul>
+<li>假如$x$填$0$,他的儿子就可以选择$1$和$0$,其中又包含了是否要连接他与儿子那条边。</li>
+<li>假如$x$填$1$,他的儿子就可以选择$0$,其中也包含了是否要连接他与儿子那条边。如果不连接会出现儿子自己一个人的情况。</li>
+<li>如果$x$不在集合中，他的儿子就可以选择$1$和$0$,只要讨论不连$x$的情况。</li>
+<li>在$x$不连儿子的时候，会重复出现儿子一个人情况（也就是儿子不在集合内$dp[son][2]$,减去一次即可。</li>
+<li>根据乘法原理，都是相乘</li>
+<li>最后答案$dp[rt][1]+dp[rt][0]-2*dp[rt][2]+(dp[rt][2]-1)$。顶点不能单独为一点,需要都减去,最后加上$dp[rt][2]-1$是因为下面什么都不取的情况。</li>
+</ul>
 <details>
-  <summary>模版</summary>
+  <summary>代码</summary>
 
-```c++
-#include <iostream>
-#include <queue>
-#include <vector>
-#include<cstring>
-#include<algorithm>
-#include<cstdio>
-using namespace std;
-#define inf 0x7fffffff
-const int N = 1e5 + 10;
-struct node
-{
-    int to, w, next;
-} e[N << 1];
-int head[N], cnt, n, k, d[N], deep[N];
-int num, ans, f[N], son[N], vis[N], root, sum;
-void addedge(int u, int v, int w)
-{
-    e[++cnt].to = v;
-    e[cnt].w = w;
-    e[cnt].next = head[u];
-    head[u] = cnt;
-}
-void getroot(int x, int fa)
-{
-    son[x] = 1;
-    f[x] = 0;
-    for (int i = head[x]; i; i = e[i].next)
-    {
-        if (e[i].to == fa || vis[e[i].to])
-            continue;
-        getroot(e[i].to, x);
-        son[x] += son[e[i].to];
-        f[x] = max(f[x], son[e[i].to]);
-    }
-    f[x] = max(f[x], sum - son[x]);
-    if (f[x] < f[root])
-        root = x;
-}
-void getdeep(int x, int fa)
-{
-    deep[++num] = d[x];
-
-    for (int i = head[x]; i; i = e[i].next)
-        if (e[i].to != fa && !vis[e[i].to])
-        {
-            d[e[i].to] = d[x] + e[i].w;
-            getdeep(e[i].to, x);
-        }
-}
-int calc(int x, int now)
-{
-    int st = 0;
-    d[x] = now;
-    num = 0;
-    getdeep(x, 0);
-    sort(deep + 1, deep + 1 + num);
-    int l = 1, r = num;
-    while (l < r)
-    {
-        if (deep[l] + deep[r] <= k)
-            st += r - l, l++;
-       else  r--;
-    }
-    return st;
-}
-void slove(int x)
-{
-    ans += calc(x, 0);
-    vis[x] = 1;
-    for (int i = head[x]; i; i = e[i].next)
-        if (!vis[e[i].to])
-        {
-            ans -= calc(e[i].to, e[i].w);
-            sum = son[e[i].to];
-            root = 0;
-            getroot(e[i].to, root);
-            slove(root);
-        }
-}
-int main()
-{
-    while (scanf("%d%d", &n, &k) != EOF && n && k)
-    {
-        ans = 0;
-        root = 0;
-        cnt = 0;
-        sum = n;
-        f[0] = inf;
-        memset(vis, 0, sizeof(vis));
-        memset(head, 0, sizeof(head));
-        for (int i = 1; i < n; i++)
-        {
-            int u, v, w;
-            scanf("%d%d%d", &u, &v, &w);
-            addedge(u, v, w);
-            addedge(v, u, w);
-        }
-        getroot(1, 0);
-        slove(root);
-        printf("%d\n", ans);
-    }
-}
-``` 
-</details>
-
-
-
-<h4 id="POJ-1655"><a href="#POJ-1655" class="headerlink" title="POJ 1655"></a>POJ 1655</h4><details>
-  <summary>树的重心</summary>
-
-```c++
-#include <iostream>
-#include <cstdio>
-#include <vector>
-#include <cmath>
-#include<cstring>
-using namespace std;
-#define inf 0x7fffffff
-const int N = 2e5 + 10;
-struct node
-{
-    int to, next, w;
-} e[N << 1];
-int head[N], n, cnt, si[N];
-int rootsiz, root;
-void init()
-{
-    cnt = 0;
-    memset(head, 0, sizeof(head));
-    root = inf;
-    rootsiz = inf;
-}
-void addedge(int u, int v, int w)
-{
-    e[++cnt].to = v;
-    e[cnt].w = w;
-    e[cnt].next = head[u];
-    head[u] = cnt;
-}
-void getroot(int x, int fa)
-{
-    si[x] = 1;
-    int tmp = 0;
-    for (int i = head[x]; i; i = e[i].next)
-        if (e[i].to != fa)
-        {
-            getroot(e[i].to, x);
-            tmp = max(tmp, si[e[i].to]);
-            si[x] += si[e[i].to];
-        }
-    tmp = max(tmp, n - si[x]);
-    if (tmp < rootsiz || (tmp == rootsiz && x < root))
-    {
-        root = x;
-        rootsiz = tmp;
-    }
-}
-int T;
-int main()
-{
-    scanf("%d", &T);
-    while (T--)
-    {
-        init();
-        scanf("%d", &n);
-        for (int i = 1; i < n; i++)
-        {
-            int u, v;
-            scanf("%d%d", &u, &v);
-            addedge(u, v, 1);
-            addedge(v, u, 1);
-        }
-        getroot(1, 0);
-        printf("%d %d\n", root, rootsiz);
-    }
-}
-``` 
-</details>
-
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pii pair<span class="meta-string">&lt;int, int&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mk make_pair</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">3e5</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">998244353</span>;</span><br><span class="line">ll dp[N][<span class="number">3</span>];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; g[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> fa)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    dp[x][<span class="number">0</span>] = dp[x][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    dp[x][<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> to : g[x])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (to == fa)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        dfs(to, x);</span><br><span class="line">        dp[x][<span class="number">2</span>] = (dp[to][<span class="number">1</span>] + dp[to][<span class="number">0</span>] - dp[to][<span class="number">2</span>] + mod) % mod * dp[x][<span class="number">2</span>] % mod;</span><br><span class="line">        dp[x][<span class="number">0</span>] = (<span class="number">2</span> * dp[to][<span class="number">1</span>] + <span class="number">2</span> * dp[to][<span class="number">0</span>] - dp[to][<span class="number">2</span>] + mod) % mod * dp[x][<span class="number">0</span>] % mod;</span><br><span class="line">        dp[x][<span class="number">1</span>] = (dp[to][<span class="number">1</span>] + <span class="number">2</span> * dp[to][<span class="number">0</span>] - dp[to][<span class="number">2</span>] + mod) % mod * dp[x][<span class="number">1</span>] % mod;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u, v;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;u, &amp;v);</span><br><span class="line">        g[u].push_back(v);</span><br><span class="line">        g[v].push_back(u);</span><br><span class="line">    &#125;</span><br><span class="line">    dfs(<span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">    <span class="comment">//cout &lt;&lt; dp[1][0] &lt;&lt; " " &lt;&lt; dp[1][1] &lt;&lt; " " &lt;&lt; dp[1][2] &lt;&lt; endl;</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, (dp[<span class="number">1</span>][<span class="number">1</span>] + dp[<span class="number">1</span>][<span class="number">0</span>] - dp[<span class="number">1</span>][<span class="number">2</span>] - <span class="number">1</span> + mod) % mod);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  </details>
       
     </div>
     
@@ -517,7 +339,7 @@ int main()
       
         <div class="post-tags">
           
-            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+            <a href="/tags/%E6%A0%91%E5%BD%A2dp/" rel="tag"># 树形dp</a>
           
         </div>
       
@@ -530,8 +352,8 @@ int main()
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/15/ICPC%E5%8D%97%E6%98%8C%E7%BD%91%E7%BB%9C%E8%B5%9BI/" rel="next" title="ICPC南昌网络赛I.Yukino With Subinterval">
-                <i class="fa fa-chevron-left"></i> ICPC南昌网络赛I.Yukino With Subinterval
+              <a href="/2020/04/01/CF1332E/" rel="next" title="1332E - Height All the Same">
+                <i class="fa fa-chevron-left"></i> 1332E - Height All the Same
               </a>
             
           </div>
@@ -540,8 +362,8 @@ int main()
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/11/04/HDU5977/" rel="prev" title="HDU5977 树分治">
-                HDU5977 树分治 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/09/18/min25%E7%AD%9B/" rel="prev" title="min25筛">
+                min25筛 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -594,17 +416,8 @@ int main()
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -684,22 +497,6 @@ int main()
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#树分治"><span class="nav-number">1.</span> <span class="nav-text">树分治</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树的重心"><span class="nav-number">2.</span> <span class="nav-text">树的重心</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#POJ-1655"><span class="nav-number">2.0.1.</span> <span class="nav-text">POJ 1655</span></a></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
