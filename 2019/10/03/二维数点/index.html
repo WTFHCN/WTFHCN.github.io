@@ -754,7 +754,7 @@ Sum(x1,y1,x2,y2)=Sum(0,0,x2,y2)-Sum(0,0,x2,y1-1)-Sum(0,0,x1-1,y2)+Sum(0,0,x1-1,y
   
   <script type="text/javascript">
     var GUEST = ['nick','mail','link'];
-    var guest = 'nick,mail,link';
+    var guest = 'nick,mail';
     guest = guest.split(',').filter(item=>{
       return GUEST.indexOf(item)>-1;
     });
@@ -767,7 +767,7 @@ Sum(x1,y1,x2,y2)=Sum(0,0,x2,y2)-Sum(0,0,x2,y1-1)-Sum(0,0,x1-1,y2)+Sum(0,0,x1-1,y
         placeholder: '开冲',
         avatar:'mm',
         guest_info:guest,
-        pageSize:'10' || 10,
+        pageSize:'3' || 10,
     });
   </script>
 
