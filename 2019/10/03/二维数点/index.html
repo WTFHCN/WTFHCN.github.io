@@ -277,6 +277,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/03/%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%82%B9/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/03/%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%82%B9/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -387,6 +397,9 @@ Sum(x1,y1,x2,y2)=Sum(0,0,x2,y2)-Sum(0,0,x2,y1-1)-Sum(0,0,x1-1,y2)+Sum(0,0,x1-1,y
 
           
 
+  
+    <div class="comments" id="comments">
+    </div>
   
 
 
@@ -735,6 +748,28 @@ Sum(x1,y1,x2,y2)=Sum(0,0,x2,y2)-Sum(0,0,x2,y1-1)-Sum(0,0,x1-1,y2)+Sum(0,0,x1-1,y
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'IgPAxVJQJzq0nYGRuFJpt8to-gzGzoHsz',
+        appKey: 'UN6YfzRASnogm9R0NOY769Qn',
+        placeholder: '开冲',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 
