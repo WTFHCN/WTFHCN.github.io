@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="学习笔记," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="NaCNer" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="题意：给出一棵树，求出树上距离不超过$k$的点对数量。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="点分治">
+<meta property="og:url" content="http://yoursite.com/2019/10/27/%E6%A0%91%E5%88%86%E6%B2%BB/index.html">
+<meta property="og:site_name" content="NaCNer">
+<meta property="og:description" content="题意：给出一棵树，求出树上距离不超过$k$的点对数量。">
+<meta property="og:image" content="https://i.loli.net/2019/11/20/EqiMNheuAjp3TgC.png">
+<meta property="og:image" content="https://i.loli.net/2019/10/27/mMeY4HSOJC9TtvK.png">
+<meta property="article:published_time" content="2019-10-27T01:28:21.000Z">
+<meta property="article:modified_time" content="2020-04-01T10:27:58.969Z">
+<meta property="article:author" content="HCN">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2019/11/20/EqiMNheuAjp3TgC.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/10/27/树分治/"/>
+
+
+
+
+
+  <title>点分治 | NaCNer</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">NaCNer</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/27/%E6%A0%91%E5%88%86%E6%B2%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HCN">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NaCNer">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">点分治</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-27T09:28:21+08:00">
+                2019-10-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/27/%E6%A0%91%E5%88%86%E6%B2%BB/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/27/%E6%A0%91%E5%88%86%E6%B2%BB/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>题意：<br>给出一棵树，求出树上距离不超过$k$的点对数量。<br><a id="more"></a></p>
+<h2 id="树分治"><a href="#树分治" class="headerlink" title="树分治"></a>树分治</h2><p><img src="https://i.loli.net/2019/11/20/EqiMNheuAjp3TgC.png" width="500" hegiht="313" align=center /></p>
+<p>对于一棵子树，满足条件的路径包括(经过根的路径，和子树里的路径)! </p>
+<p>所以我先以它的根为起点，向下搜索，等到路途的$5$条路径长度$dis[5]$，假设$k=7$,通过$5$条路径的配对有$(2,3,4,5,6,7)$:</p>
+<p>排序后，建立双指针$l=1,r=5$,若$a[l]+a[r]\leq k$则$(l,r]$里都成立。这样就只要$O(nlogn+n)$就可以实现找合理路径。</p>
+<p>但是显然$(3+4)$这条路径不符合条件，它是$1-&gt;3-&gt;4与1-&gt;3$配对而成(因为我们需要不同一个子树里的路径互相配对),我们需要将他去掉，只需要在继续搜索子树结点时,再次使用以上方法找到子树的$3$条路径,在答案种减去符合的就好了。</p>
+<p>但是为了退化到一条链的情况或是有个子树特别大：<br>假设当前树的重心为$u$,则整棵树的大小为$size(u)$,对于u的任意儿子v有，$size(v)&lt;=size(u)/2$.<br>也就是说我们每次把重心删除以后，剩下的子树的规模都至少会是源树的一半。如果原来树的大小为$n$,那么递归的层数就会使$log(n)$</p>
+<h2 id="树的重心"><a href="#树的重心" class="headerlink" title="树的重心"></a>树的重心</h2><p><img src="https://i.loli.net/2019/10/27/mMeY4HSOJC9TtvK.png" width="500" hegiht="313" align=center /></p>
+<details>
+  <summary>模版</summary>
+
+```c++
+#include <iostream>
+#include <queue>
+#include <vector>
+#include<cstring>
+#include<algorithm>
+#include<cstdio>
+using namespace std;
+#define inf 0x7fffffff
+const int N = 1e5 + 10;
+struct node
+{
+    int to, w, next;
+} e[N << 1];
+int head[N], cnt, n, k, d[N], deep[N];
+int num, ans, f[N], son[N], vis[N], root, sum;
+void addedge(int u, int v, int w)
+{
+    e[++cnt].to = v;
+    e[cnt].w = w;
+    e[cnt].next = head[u];
+    head[u] = cnt;
+}
+void getroot(int x, int fa)
+{
+    son[x] = 1;
+    f[x] = 0;
+    for (int i = head[x]; i; i = e[i].next)
+    {
+        if (e[i].to == fa || vis[e[i].to])
+            continue;
+        getroot(e[i].to, x);
+        son[x] += son[e[i].to];
+        f[x] = max(f[x], son[e[i].to]);
+    }
+    f[x] = max(f[x], sum - son[x]);
+    if (f[x] < f[root])
+        root = x;
+}
+void getdeep(int x, int fa)
+{
+    deep[++num] = d[x];
+
+    for (int i = head[x]; i; i = e[i].next)
+        if (e[i].to != fa && !vis[e[i].to])
+        {
+            d[e[i].to] = d[x] + e[i].w;
+            getdeep(e[i].to, x);
+        }
+}
+int calc(int x, int now)
+{
+    int st = 0;
+    d[x] = now;
+    num = 0;
+    getdeep(x, 0);
+    sort(deep + 1, deep + 1 + num);
+    int l = 1, r = num;
+    while (l < r)
+    {
+        if (deep[l] + deep[r] <= k)
+            st += r - l, l++;
+       else  r--;
+    }
+    return st;
+}
+void slove(int x)
+{
+    ans += calc(x, 0);
+    vis[x] = 1;
+    for (int i = head[x]; i; i = e[i].next)
+        if (!vis[e[i].to])
+        {
+            ans -= calc(e[i].to, e[i].w);
+            sum = son[e[i].to];
+            root = 0;
+            getroot(e[i].to, root);
+            slove(root);
+        }
+}
+int main()
+{
+    while (scanf("%d%d", &n, &k) != EOF && n && k)
+    {
+        ans = 0;
+        root = 0;
+        cnt = 0;
+        sum = n;
+        f[0] = inf;
+        memset(vis, 0, sizeof(vis));
+        memset(head, 0, sizeof(head));
+        for (int i = 1; i < n; i++)
+        {
+            int u, v, w;
+            scanf("%d%d%d", &u, &v, &w);
+            addedge(u, v, w);
+            addedge(v, u, w);
+        }
+        getroot(1, 0);
+        slove(root);
+        printf("%d\n", ans);
+    }
+}
+``` 
+</details>
+
+
+
+<h4 id="POJ-1655"><a href="#POJ-1655" class="headerlink" title="POJ 1655"></a>POJ 1655</h4><details>
+  <summary>树的重心</summary>
+
+```c++
+#include <iostream>
+#include <cstdio>
+#include <vector>
+#include <cmath>
+#include<cstring>
+using namespace std;
+#define inf 0x7fffffff
+const int N = 2e5 + 10;
+struct node
+{
+    int to, next, w;
+} e[N << 1];
+int head[N], n, cnt, si[N];
+int rootsiz, root;
+void init()
+{
+    cnt = 0;
+    memset(head, 0, sizeof(head));
+    root = inf;
+    rootsiz = inf;
+}
+void addedge(int u, int v, int w)
+{
+    e[++cnt].to = v;
+    e[cnt].w = w;
+    e[cnt].next = head[u];
+    head[u] = cnt;
+}
+void getroot(int x, int fa)
+{
+    si[x] = 1;
+    int tmp = 0;
+    for (int i = head[x]; i; i = e[i].next)
+        if (e[i].to != fa)
+        {
+            getroot(e[i].to, x);
+            tmp = max(tmp, si[e[i].to]);
+            si[x] += si[e[i].to];
+        }
+    tmp = max(tmp, n - si[x]);
+    if (tmp < rootsiz || (tmp == rootsiz && x < root))
+    {
+        root = x;
+        rootsiz = tmp;
+    }
+}
+int T;
+int main()
+{
+    scanf("%d", &T);
+    while (T--)
+    {
+        init();
+        scanf("%d", &n);
+        for (int i = 1; i < n; i++)
+        {
+            int u, v;
+            scanf("%d%d", &u, &v);
+            addedge(u, v, 1);
+            addedge(v, u, 1);
+        }
+        getroot(1, 0);
+        printf("%d %d\n", root, rootsiz);
+    }
+}
+``` 
+</details>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/15/ICPC%E5%8D%97%E6%98%8C%E7%BD%91%E7%BB%9C%E8%B5%9BI/" rel="next" title="ICPC南昌网络赛I.Yukino With Subinterval">
+                <i class="fa fa-chevron-left"></i> ICPC南昌网络赛I.Yukino With Subinterval
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/04/HDU5977/" rel="prev" title="HDU5977 树分治">
+                HDU5977 树分治 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/1.jpg"
+                alt="HCN" />
+            
+              <p class="site-author-name" itemprop="name">HCN</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/Isaunoya/" title="Isaunoya" target="_blank">Isaunoya</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://sher-wu.github.io/" title="sher-wu" target="_blank">sher-wu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/Code92007" title="Yzm007" target="_blank">Yzm007</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://dickxyz.github.io/" title="Dick" target="_blank">Dick</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#树分治"><span class="nav-number">1.</span> <span class="nav-text">树分治</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树的重心"><span class="nav-number">2.</span> <span class="nav-text">树的重心</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#POJ-1655"><span class="nav-number">2.0.1.</span> <span class="nav-text">POJ 1655</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HCN</span>
+
+  
+
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      人
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'IgPAxVJQJzq0nYGRuFJpt8to-gzGzoHsz',
+        appKey: 'UN6YfzRASnogm9R0NOY769Qn',
+        placeholder: '开冲',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'3' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
