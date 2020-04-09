@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="树形dp," />
+  <meta name="keywords" content="数论," />
 
 
 
@@ -81,16 +81,16 @@
 
 
 
-<meta name="description" content="给一棵树选取某几个点，每个点必须有边，但不需要联通，选择其中某些点$0$，使他们成为独立集。（即之间没有连边）">
+<meta name="description" content="从$[1…n]$里挑$k$个数使得$gcd(a_i,a_j)$最大值最小。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="1332F - Independent Set">
-<meta property="og:url" content="http://yoursite.com/2020/04/01/CF1332F/index.html">
+<meta property="og:title" content="1333F - Kate and imperfection">
+<meta property="og:url" content="http://yoursite.com/2020/04/08/CF1332F/index.html">
 <meta property="og:site_name" content="NaCNer">
-<meta property="og:description" content="给一棵树选取某几个点，每个点必须有边，但不需要联通，选择其中某些点$0$，使他们成为独立集。（即之间没有连边）">
-<meta property="article:published_time" content="2020-04-01T02:47:00.000Z">
-<meta property="article:modified_time" content="2020-04-01T10:32:15.666Z">
+<meta property="og:description" content="从$[1…n]$里挑$k$个数使得$gcd(a_i,a_j)$最大值最小。">
+<meta property="article:published_time" content="2020-04-08T02:47:00.000Z">
+<meta property="article:modified_time" content="2020-04-09T10:59:41.392Z">
 <meta property="article:author" content="HCN">
-<meta property="article:tag" content="树形dp">
+<meta property="article:tag" content="数论">
 <meta name="twitter:card" content="summary">
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/04/01/CF1332F/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/04/08/CF1332F/"/>
 
 
 
 
 
-  <title>1332F - Independent Set | NaCNer</title>
+  <title>1333F - Kate and imperfection | NaCNer</title>
   
 
 
@@ -234,7 +234,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/01/CF1332F/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/08/CF1332F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HCN">
@@ -251,7 +251,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">1332F - Independent Set</h1>
+          <h1 class="post-title" itemprop="name headline">1333F - Kate and imperfection</h1>
         
 
         <div class="post-meta">
@@ -263,8 +263,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-01T10:47:00+08:00">
-                2020-04-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-08T10:47:00+08:00">
+                2020-04-08
               </time>
             
 
@@ -306,23 +306,12 @@
       
 
       
-        <p>给一棵树选取某几个点，<strong>每个点必须有边，但不需要联通</strong>，选择其中某些点$0$，使他们成为独立集。（即之间没有连边）<br><a id="more"></a><br>$dp[x][0]$表示$x$在集合中，填$0$,$x$这棵子树的方案数</p>
-<p>$dp[x][1]$表示$x$在集合中，填$1$,$x$这棵子树的方案数</p>
-<p>$dp[x][2]$表示$x$不在集合中,$x$这棵子树的方案数。、</p>
-<p>考虑一棵树$x$</p>
-<ul>
-<li>假如$x$填$0$,他的儿子就可以选择$1$和$0$,其中又包含了是否要连接他与儿子那条边。</li>
-<li>假如$x$填$1$,他的儿子就可以选择$0$,其中也包含了是否要连接他与儿子那条边。如果不连接会出现儿子自己一个人的情况。</li>
-<li>如果$x$不在集合中，他的儿子就可以选择$1$和$0$,只要讨论不连$x$的情况。</li>
-<li>在$x$不连儿子的时候，会重复出现儿子一个人情况（也就是儿子不在集合内$dp[son][2]$,减去一次即可。</li>
-<li>根据乘法原理，都是相乘</li>
-<li>最后答案$dp[rt][1]+dp[rt][0]-2*dp[rt][2]+(dp[rt][2]-1)$。顶点不能单独为一点,需要都减去,最后加上$dp[rt][2]-1$是因为下面什么都不取的情况。</li>
-</ul>
-<details>
-  <summary>代码</summary>
+        <p>从$[1…n]$里挑$k$个数使得$gcd(a_i,a_j)$最大值最小。<br><a id="more"></a><br>$gcd=1$的时候，选择所有质数。然后再选择$2$的倍数，发现只能选择因数$\leq 2$。然后选择$3$的倍数，且因数$\leq 3$。选择某个数的时候，其$gcd$就是那个数的最大因数。即处理所有的数最大的因数。桶排一下即可。</p>
+<p><details><br>  <summary>代码</summary></p>
+<p>```c++</p>
+<h1 id="include"><a href="#include" class="headerlink" title="include "></a>include <iostream></h1><h1 id="include-1"><a href="#include-1" class="headerlink" title="include "></a>include <cstdio></h1><h1 id="include-2"><a href="#include-2" class="headerlink" title="include "></a>include <algorithm></h1><h1 id="include-3"><a href="#include-3" class="headerlink" title="include "></a>include <queue></h1><h1 id="include-4"><a href="#include-4" class="headerlink" title="include "></a>include <cmath></h1><h1 id="include-5"><a href="#include-5" class="headerlink" title="include "></a>include <cstring></h1><h1 id="include-6"><a href="#include-6" class="headerlink" title="include "></a>include <vector></h1><h1 id="include-7"><a href="#include-7" class="headerlink" title="include "></a>include <map></h1><h1 id="include-8"><a href="#include-8" class="headerlink" title="include "></a>include <stack></h1><p>using namespace std;<br>typedef long long ll;</p>
+<h1 id="define-pii-pair"><a href="#define-pii-pair" class="headerlink" title="define pii pair"></a>define pii pair<int, int></h1><h1 id="define-mk-make-pair"><a href="#define-mk-make-pair" class="headerlink" title="define mk make_pair"></a>define mk make_pair</h1><p>const int N = 1e6 + 10;<br>const int mod = 1e9 + 7;<br>int n, num[N], d[N];<br>int main()<br>{<br>    cin &gt;&gt; n;<br>    d[1] = 1;<br>    for (int i = 1; i &lt;= n; i++)<br>    {<br>        for (int j = i + i; j &lt;= n; j += i)<br>            d[j] = i;<br>    }<br>    for (int i = 1; i &lt;= n; i++)<br>        num[d[i]]++;<br>    for (int i = 1; i &lt;= n; i++)<br>    {<br>        for (int j = 1; j &lt;= num[i]; j++)<br>            if (i != 1 || j != 1)<br>                printf(“%d “, i);<br>    }<br>}</p>
 
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pii pair<span class="meta-string">&lt;int, int&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mk make_pair</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">3e5</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">998244353</span>;</span><br><span class="line">ll dp[N][<span class="number">3</span>];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; g[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> fa)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    dp[x][<span class="number">0</span>] = dp[x][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    dp[x][<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> to : g[x])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (to == fa)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        dfs(to, x);</span><br><span class="line">        dp[x][<span class="number">2</span>] = (dp[to][<span class="number">1</span>] + dp[to][<span class="number">0</span>] - dp[to][<span class="number">2</span>] + mod) % mod * dp[x][<span class="number">2</span>] % mod;</span><br><span class="line">        dp[x][<span class="number">0</span>] = (<span class="number">2</span> * dp[to][<span class="number">1</span>] + <span class="number">2</span> * dp[to][<span class="number">0</span>] - dp[to][<span class="number">2</span>] + mod) % mod * dp[x][<span class="number">0</span>] % mod;</span><br><span class="line">        dp[x][<span class="number">1</span>] = (dp[to][<span class="number">1</span>] + <span class="number">2</span> * dp[to][<span class="number">0</span>] - dp[to][<span class="number">2</span>] + mod) % mod * dp[x][<span class="number">1</span>] % mod;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u, v;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;u, &amp;v);</span><br><span class="line">        g[u].push_back(v);</span><br><span class="line">        g[v].push_back(u);</span><br><span class="line">    &#125;</span><br><span class="line">    dfs(<span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">    <span class="comment">//cout &lt;&lt; dp[1][0] &lt;&lt; " " &lt;&lt; dp[1][1] &lt;&lt; " " &lt;&lt; dp[1][2] &lt;&lt; endl;</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, (dp[<span class="number">1</span>][<span class="number">1</span>] + dp[<span class="number">1</span>][<span class="number">0</span>] - dp[<span class="number">1</span>][<span class="number">2</span>] - <span class="number">1</span> + mod) % mod);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-  </details>
       
     </div>
     
@@ -339,7 +328,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E6%A0%91%E5%BD%A2dp/" rel="tag"># 树形dp</a>
+            <a href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag"># 数论</a>
           
         </div>
       
@@ -352,8 +341,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/04/01/CF757E/" rel="next" title="CF757E. Bash Plays with Functions">
-                <i class="fa fa-chevron-left"></i> CF757E. Bash Plays with Functions
+              <a href="/2020/04/07/CF666E/" rel="next" title="CF666E Forensic Examination">
+                <i class="fa fa-chevron-left"></i> CF666E Forensic Examination
               </a>
             
           </div>
@@ -362,8 +351,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/04/02/CF1215D/" rel="prev" title="CF1215E. Marbles">
-                CF1215E. Marbles <i class="fa fa-chevron-right"></i>
+              <a href="/2020/04/09/CF710F/" rel="prev" title="CF710F. String Set Queries AC自动机二进制分组">
+                CF710F. String Set Queries AC自动机二进制分组 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -419,8 +408,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -439,7 +437,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">95</span>
+                  <span class="site-state-item-count">97</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -508,6 +506,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#include"><span class="nav-number">1.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-1"><span class="nav-number">2.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-2"><span class="nav-number">3.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-3"><span class="nav-number">4.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-4"><span class="nav-number">5.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-5"><span class="nav-number">6.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-6"><span class="nav-number">7.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-7"><span class="nav-number">8.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-8"><span class="nav-number">9.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#define-pii-pair"><span class="nav-number">10.</span> <span class="nav-text">define pii pair</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#define-mk-make-pair"><span class="nav-number">11.</span> <span class="nav-text">define mk make_pair</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
