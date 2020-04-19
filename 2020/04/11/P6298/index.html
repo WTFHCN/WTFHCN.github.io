@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="NaCNer">
 <meta property="og:description" content="给$n$个数，求取$k$个数的$gcd&#x3D;m$的方案数，求出所有$m$。">
 <meta property="article:published_time" content="2020-04-11T02:47:00.000Z">
-<meta property="article:modified_time" content="2020-04-11T11:18:19.598Z">
+<meta property="article:modified_time" content="2020-04-11T11:24:04.000Z">
 <meta property="article:author" content="HCN">
 <meta property="article:tag" content="容斥">
 <meta name="twitter:card" content="summary">
@@ -306,9 +306,10 @@
       
 
       
-        <p>给$n$个数，求取$k$个数的$gcd=m$的方案数，求出所有$m$。<br><a id="more"></a><br>$gcd=x$如果选择$C_{x的倍数的个数}^k$。会重复到$f(xk)$</p>
+        <p>给$n$个数，求取$k$个数的$gcd=m$的方案数，求出所有$m$。<br><a id="more"></a><br>$g(x)=\sum [x|a[i]]$</p>
+<p>$gcd=x$如果选择$C_{g(x)}^k$。会重复到$f(xk)$</p>
 <script type="math/tex; mode=display">
-f(x)=C_{x的倍数的个数}^k-\sum_{ik\leq m}f(ik)</script><p>倒过来枚举，调和级数$O(m\log m)$</p>
+f(x)=C_{g(x)}^k-\sum_{ik\leq m}f(ik)</script><p>倒过来枚举，调和级数$O(m\log m)$</p>
 <details>
   <summary>代码</summary>
 
