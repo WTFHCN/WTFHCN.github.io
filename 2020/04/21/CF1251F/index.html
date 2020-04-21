@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="NaCNer">
 <meta property="og:description" content="给$n$个白木板，$k$个红木板，放置木板。$Q$个询问。  周长为$Q_i$ 有一块红木板，其余都是白木板，成以红为中心单峰。即前面上升，之后下降  求方案数，$n,l_i,l_k,q\leq 3\times 10^5,k\leq 5$">
 <meta property="article:published_time" content="2020-04-21T02:47:00.000Z">
-<meta property="article:modified_time" content="2020-04-21T08:53:17.489Z">
+<meta property="article:modified_time" content="2020-04-21T09:20:24.878Z">
 <meta property="article:author" content="HCN">
 <meta property="article:tag" content="NTT">
 <meta name="twitter:card" content="summary">
@@ -318,7 +318,10 @@
 <li>如果$a[j]&lt;b[i],cnt[a[j]=1$  ,表示可以放左边也可以放右边。</li>
 <li>如果$a[j]<b[i],cnt[a[j]>1$  ,只存在一个木板放在左边，一个放在右边。（这样就不出现重复了)</li>
 </ul>
-<p>$n1$表示$a[j]<b[i],cnt[a[j]=1$的数量，$n2$表示$a[j]<b[i],cnt[a[j]>1$的数量。</p>
+<ul>
+<li>$n1$表示$a[j]&lt;b[i],cnt[a[j]=1$的数量，</li>
+<li>$n2$表示$a[j]<b[i],cnt[a[j]>1$的数量。</li>
+</ul>
 <p>还需要放$k$个白木板的就是$\sum_{i+j=k} (2^i)C_{n1}^iC_{n2}^j$<br>这里使用$NTT$卷积即可。复杂度$O(k(n+nlogn)+kq)$</p>
 <details>
   <summary>代码</summary>
@@ -365,8 +368,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/09/18/min25%E7%AD%9B/" rel="prev" title="Min25筛">
-                Min25筛 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/04/21/WF2019E/" rel="prev" title="World Final 2019 G. First of Her Name">
+                World Final 2019 G. First of Her Name <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -442,7 +445,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-count">109</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
