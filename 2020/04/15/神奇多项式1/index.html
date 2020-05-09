@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="dp," />
+  <meta name="keywords" content="学习笔记," />
 
 
 
@@ -81,16 +81,16 @@
 
 
 
-<meta name="description" content="给你$n$个区间$[l_i,r_i]$,可以选$0$,选出一个数，求选完后为非$0$的要为递增序列的种类。$(n\leq 500,l_i,r_i\leq 10^9)$，不能全部为0">
+<meta name="description" content="神奇的多项式1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="APIO2016划艇">
-<meta property="og:url" content="http://yoursite.com/2020/02/20/APIO2016%E8%B5%9B%E8%89%87/index.html">
+<meta property="og:title" content="神奇的多项式1 （FFT NTT FWT MTT）">
+<meta property="og:url" content="http://yoursite.com/2020/04/15/%E7%A5%9E%E5%A5%87%E5%A4%9A%E9%A1%B9%E5%BC%8F1/index.html">
 <meta property="og:site_name" content="NaCNer">
-<meta property="og:description" content="给你$n$个区间$[l_i,r_i]$,可以选$0$,选出一个数，求选完后为非$0$的要为递增序列的种类。$(n\leq 500,l_i,r_i\leq 10^9)$，不能全部为0">
-<meta property="article:published_time" content="2020-02-20T05:14:13.000Z">
-<meta property="article:modified_time" content="2020-03-22T13:33:24.000Z">
+<meta property="og:description" content="神奇的多项式1">
+<meta property="article:published_time" content="2020-04-15T02:47:00.000Z">
+<meta property="article:modified_time" content="2020-05-09T13:54:52.553Z">
 <meta property="article:author" content="HCN">
-<meta property="article:tag" content="dp">
+<meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary">
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/02/20/APIO2016赛艇/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/04/15/神奇多项式1/"/>
 
 
 
 
 
-  <title>APIO2016划艇 | NaCNer</title>
+  <title>神奇的多项式1 （FFT NTT FWT MTT） | NaCNer</title>
   
 
 
@@ -234,7 +234,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/20/APIO2016%E8%B5%9B%E8%89%87/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/15/%E7%A5%9E%E5%A5%87%E5%A4%9A%E9%A1%B9%E5%BC%8F1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HCN">
@@ -251,7 +251,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">APIO2016划艇</h1>
+          <h1 class="post-title" itemprop="name headline">神奇的多项式1 （FFT NTT FWT MTT）</h1>
         
 
         <div class="post-meta">
@@ -263,8 +263,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-20T13:14:13+08:00">
-                2020-02-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-15T10:47:00+08:00">
+                2020-04-15
               </time>
             
 
@@ -306,26 +306,112 @@
       
 
       
-        <p>给你$n$个区间$[l_i,r_i]$,可以选$0$,选出一个数，求选完后为非$0$的要为递增序列的种类。$(n\leq 500,l_i,r_i\leq 10^9)$，不能全部为0<br><a id="more"></a><br>与$CF1295F$，几乎一致。</p>
-<p>首先证明线性逆元的求法<br>设$r=i/p,q=i\%p$</p>
+        <p>神奇的多项式1<br><a id="more"></a></p>
+<h1 id="FFT"><a href="#FFT" class="headerlink" title="FFT"></a>FFT</h1><p>$f(x)=a_0+a_1x+a_2x^2…a_nx^n,g(x)=a_0+a_1x+a_2x^2…a_nx^n$</p>
+<p>定义$h(x)=g(x)\times f(x)$ ，小学学习的多项式乘法$n^2$。</p>
+<h2 id="工具-复数"><a href="#工具-复数" class="headerlink" title="工具-复数"></a>工具-复数</h2><p>定义$n$个复数。将复数坐标系上单位圆分成$n$份。<br>$e^{ix}=\cos x+i\sin x$。</p>
+<p>$w_n^{i}=\cos \frac{2\pi k}{n}+i\sin \frac{2\pi k}{n}$</p>
+<p>复数相乘类似向量，并且满足辅角相加，模长相乘。</p>
+<p>$w_n^k=w_n^{k+n},w_n^k=-w_n^{k+\frac{n}{2}},w_n^k=w_{\frac{n}{2}}^{\frac{k}{2}},\frac{1}{w_n^k}=w_n^{-k}$</p>
+<h2 id="点值表达法"><a href="#点值表达法" class="headerlink" title="点值表达法"></a>点值表达法</h2><p>可以转换为点值表达法,朴素暴力转换$n^2$</p>
+<p>$(x_0,f(x_0)),(x_1,f(x_1)),(x_2,f(x_2))…(x_{n-1},f(x_{n-1})),$</p>
+<p>$(x_0,g(x_0)),(x_1,g(x_1)),(x_2,g(x_2))…(x_{n-1},g(x_{n-1})),$</p>
+<p>然后$n$的相乘就可以得到$h(x)$的点值表达了。</p>
+<p>有已知$n-1$个点值表示就可以确定$f_n(x)$，显然瓶颈在互相转换的时间复杂度上。</p>
+<h2 id="DFT"><a href="#DFT" class="headerlink" title="DFT"></a>DFT</h2><p>即转换成点值表达法,考虑使用这些复数当点值。假设$n=2^k$</p>
+<p>$h(x)=(a_0+a_2x^2+…a_{n-2}x^{n-2})+(a_1x+a_3x^3+…a_{n-1}x^{n-1})$</p>
+<p>设$h_0(x)=(a_0+a_2x^1+…a_{n-2}x^{(n-2)/2}),h_1(x)=(a_1+a_3x^1+…a_{n-1}x^{(n-2)/2})$</p>
+<p>$h(x)=h_0(x^2)+xh_1(x^2)$</p>
+<p>带入$w_n^k,w_n^{k+\frac{n}{2}}$</p>
+<p>$h(w_n^k)=h_0(w_n^{2k})+w_n^kh_1(w_n^{2k})$</p>
+<p>$h(w_n^{k+\frac{n}{2}})=h_0(w_n^{2k+n})+w_n^{k+\frac{n}{2}}(w_n^{2k+n})=h_0(w_n^{2k})-w_n^{k}h_1(w_n^{2k})$</p>
+<p>也就是知道$h_1(w_n^{2k})和h_0(w_n^{2k}),$就可以知道$h(w_n^{k})$和$h(w_n^{k+\frac{n}{2}})$</p>
+<p>例如$h(w_4^0),h(w_4^1),h(w_4^2),h(w_4^3)$</p>
+<p>$h(w_4^0)=h_0(w_4^0)+w_4^0h_1(w_4^0)$</p>
+<p>$h_0(w_4^0)=h_{00}(w_4^0)+w_4^0h_{01}(w_4^0)$</p>
+<p>$h(w_4^3)=h_0(w_4^0)-w_4^0h_1(w_4^0)$</p>
+<p>$h_0(w_4^3)=h_{00}(w_4^3)-w_4^0h_{01}(w_4^3)$</p>
+<p>$h_{00}(w_4^0)=a_0,h_{01}(w_4^0)=a1$</p>
+<p>每次将原来的问题分成一半来处理递归层数$\log n$<br>就可以通过递归解决</p>
+<h2 id="IDFT"><a href="#IDFT" class="headerlink" title="IDFT"></a>IDFT</h2><p>将点值表达式转化为多项式表达。</p>
+<p>$f(x)\rightarrow {y_0,y_1,y_2,y_{n-1}}$<br>$B(x)=y_0x^0+y_1x^1+y_2x^2…y_{n-1}x^{n-1}$</p>
+<p>设$B(w_n^{-k})=\sum y_i (w_n^{-k})^i=\sum \sum (a_j (w_n^{i})^j) (w_n^{-k})^i=\sum a_j\sum ( w_n^{j}w_n^{-k})^i$</p>
+<p>$\sum (w_n^{j-k})^i=(j==k)?n:0$等比数列求和即可</p>
+<p>$\rightarrow B(w_n^{-k})/n= a_k$ </p>
+<p>也就是带入$w_n^{-i}$当点值即可。</p>
+<h4 id="线代"><a href="#线代" class="headerlink" title="线代"></a>线代</h4><script type="math/tex; mode=display">
+\left[
+ \begin{matrix}
+   x_0^0 & x_0^2 &...& x_0^{n-1}  \\
+    x_1^0 & x_1^2 &...& x_1^{n-1}  \\
+   x_2^0 & x_2^2 &...& x_2^{n-1}  \\
+   ... & .. &...& ...  \\
+    x_{n-1}^0 & x_{n-1}^2 &...& x_{n-1}^{n-1}  \\
+  \end{matrix} 
+\right]
+\left[
+ \begin{matrix}
+   a_0  \\
+    a_1  \\
+   a_2   \\
+   ...   \\
+    a_{n-1}  \\
+  \end{matrix} 
+\right]
+=\left[
+ \begin{matrix}
+   f_0  \\
+    f_1  \\
+   f_2   \\
+   ...   \\
+    f_{n-1}  \\
+  \end{matrix} 
+\right]</script><p>求左边矩阵的逆</p>
 <script type="math/tex; mode=display">
-    i*r+q \equiv 0\pmod p\\
-    r*q^{-1}+i^{-1}\equiv 0\pmod p\\
-    i^{-1}=(p-i/p)*r^{-1}</script><p>然后离散化，离散化的目的是让每一个数，存在的区间只有一个。不会重复</p>
-<p>$dp[i][j]$,表示第$i$个数选在第$j$个区间或者之前的区间里的方案。</p>
-<p>$f[i][j]$,表示第$i$个数选在第$j$个区间里的方案</p>
-<p>在$len$长的区间里选$m$个不重复数或者选$0$=$C(Len+m,m)$</p>
-<script type="math/tex; mode=display">
-    f[i][j]=\sum_{p=1}^{i-1}\sum_{k=0}^{j-1}f[p][k]*C(Len+m-1,m)\\
-    f[i][j]=\sum_{p=1}^{i-1}dp[p][j-1]*C(Len+m-1,m)\\</script><p>这里保证$f[i][j]$,第$i$个数选到，$m$=$i..p$旧区间之间，包含$j$个区间。</p>
-<p>这次我们先从小到大枚举区间，公式可知使用滚动数组$is\ ok$</p>
-<details>
-  <summary>代码</summary>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e3</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">int</span> n, l[N], r[N], li[N], cnt;</span><br><span class="line"><span class="keyword">int</span> dp[N][N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> inv[N], c[N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;l[i], &amp;r[i]), r[i]++, li[++cnt] = l[i], li[++cnt] = r[i];</span><br><span class="line">    inv[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++)</span><br><span class="line">        inv[i] = <span class="number">1l</span>l * (mod - mod / i) * inv[mod % i] % mod;</span><br><span class="line">    sort(li + <span class="number">1</span>, li + cnt + <span class="number">1</span>);</span><br><span class="line">    cnt = unique(li + <span class="number">1</span>, li + cnt + <span class="number">1</span>) - li - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        l[i] = lower_bound(li + <span class="number">1</span>, li + cnt + <span class="number">1</span>, l[i]) - (li);</span><br><span class="line">        r[i] = lower_bound(li + <span class="number">1</span>, li + cnt + <span class="number">1</span>, r[i]) - (li);</span><br><span class="line">    &#125;</span><br><span class="line">    c[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; cnt; j++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> len = li[j + <span class="number">1</span>] - li[j];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            c[i] = <span class="number">1l</span>l * c[i - <span class="number">1</span>] * (len + i - <span class="number">1</span>) % mod * inv[i] % mod;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (l[i] &lt;= j &amp;&amp; j &lt; r[i])</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> p = <span class="number">1</span>, k = i - <span class="number">1</span>; k &gt;= <span class="number">0</span>; k--)</span><br><span class="line">                &#123;</span><br><span class="line">                    dp[i][j] = (dp[i][j] + <span class="number">1l</span>l * dp[k][j - <span class="number">1</span>] * c[p]) % mod;</span><br><span class="line">                    <span class="keyword">if</span> (l[k] &lt;= j &amp;&amp; j &lt; r[k])</span><br><span class="line">                        ++p;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++)</span><br><span class="line">            dp[i][j] = (dp[i][j] + dp[i][j - <span class="number">1</span>]) % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        ans = (ans + dp[i][cnt - <span class="number">1</span>]) % mod;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</details>
-
-
+\left[
+ \begin{matrix}
+    \frac{1}{n}(w_n^0)^0 &\frac{1}{n}(w_n^0)^1  &...& \frac{1}{n}(w_n^0)^{n-1}  \\
+   \frac{1}{n}(w_n^{-1})^0 &\frac{1}{n}(w_n^{-1})^1  &...& \frac{1}{n}(w_n^{-1})^{n-1}   \\
+  \frac{1}{n}(w_n^{-2})^0 &\frac{1}{n}(w_n^{-2})^1  &...& \frac{1}{n}(w_n^{-2})^{n-1}   \\
+   ... & .. &...& ...  \\
+    \frac{1}{n}(w_n^{-n+1})^0 &\frac{1}{n}(w_n^{-n+1})^1  &...& \frac{1}{n}(w_n^{-n+1})^{n-1}   \\
+  \end{matrix} 
+\right]</script><p>为什么是逆矩阵，可以乘起来发现形式类似$\sum (w_n^{j-k})^i$</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>$f(x)\rightarrow DFT$,<br>$g(x)\rightarrow DFT$,<br>$h(x)=f(x)\times g(x)$,<br>$h(x)\rightarrow IDFT$</p>
+<h4 id="蝴蝶变换"><a href="#蝴蝶变换" class="headerlink" title="蝴蝶变换"></a>蝴蝶变换</h4><p>递归常数过大，考虑直接从底层向上推。那么就需要确定$a_i$最后会处于啥位置。可以推导，可以打表找规律，即二进制反过来。</p>
+<ul>
+<li>保证扩大$n$，保证$n=2^k$</li>
+<li>可以提前预处理$rev[abcde]=re[0abcd]&gt;&gt;1|[e0000]$</li>
+</ul>
+<p>代码见板子。</p>
+<h1 id="NTT"><a href="#NTT" class="headerlink" title="NTT"></a>NTT</h1><h2 id="原根"><a href="#原根" class="headerlink" title="原根"></a>原根</h2><p>若 $gcd(a,m)=1$ ，使$a^l\equiv 1(mod \ m)$  成立的最小的$l$  ，称为 $a$ 关于模$m$ 的阶  。</p>
+<p>根据欧拉定理$a^{\phi (m)}\equiv 1(mod \ m)$<br>若$g$ 关于模$m$ 的阶 为$\phi(m)$,称 $g$ 为 $m$ 的一个原根</p>
+<p>🐦可以证明原根符合单位根$w_n^i$的性质。</p>
+<p>于是用$g^{\frac{p-1}{n}} \mod p$代替单位根。</p>
+<p>证明🐦</p>
+<p>但实际上由于快速傅里叶变换（$FFT$）实现的多项式乘法的过程中要求序列长度是 $2$ 的幂次，因此这里模数$p$  还需要保证$p-1$ 的标准分解式中素因子$2$  的幂次足够大。</p>
+<p>代码见板子。</p>
+<h1 id="FWT"><a href="#FWT" class="headerlink" title="FWT"></a>FWT</h1><p>$FWT$ 和 $FFT$ 的核心思想应该是相同的，都是对数组的变换。我们记对数组 $A$ 进行快速沃尔什变换后得到的结果为$FWT(A)$</p>
+<ul>
+<li>保证$n=2^k$</li>
+</ul>
+<h2 id="or"><a href="#or" class="headerlink" title="$or$"></a>$or$</h2><p>$FWT(A)=\sum_i\sum_{j|i=i} A(j)$</p>
+<p>通过异的的性质</p>
+<p>$A_0$或$A_1$得不到本身。<br>$A_1$或对应的$A_0$可以得到本身。</p>
+<p>$FWT(A)=merge(FWT(A_0),FWT(A_0)+FWT(A_1))$</p>
+<p>反向推导 $(a,b+a) \rightarrow (a,b)$</p>
+<p>$UFWT(A)=merge(UFWT(A_0),UFWT(A_1)-UFWT(A_0))$</p>
+<h2 id="and"><a href="#and" class="headerlink" title="$and$"></a>$and$</h2><p>$FWT(A)=\sum_i\sum_{j\&amp;i=i} A(j)$</p>
+<p>通过与的性质</p>
+<p>$A_0$与$A_1$得不到本身。<br>$A_1$只有自己才能得到右半边。<br>$A_1$或对应的$A_0$可以得左边。</p>
+<p>$FWT(A)=merge(FWT(A_0)+FWT(A_1),FWT(A_0))$</p>
+<p>反向推导 $(a+b,b) \rightarrow (a,b)$</p>
+<p>$UFWT(A)=merge(FWT(A_0)-FWT(A_1),FWT(A_0))$</p>
+<h2 id="xor"><a href="#xor" class="headerlink" title="$xor$"></a>$xor$</h2><p>$FWT(A)=\sum_i(\sum_{j|i=偶数} A(j)-\sum_{j|i=奇数} A(j))$</p>
+<p>$FWT(A)=merge(FWT(A_1)-FWT(A_0),FWT(A_0)+FWT(A_1))$</p>
+<p>反向推导 $(a+b,a-b) \rightarrow (a,b)$</p>
+<p>$UFWT(A)=merge(\frac{FWT(A_1)-FWT(A_0)}{2},\frac{FWT(A_1)+FWT(A_0)}{2})$</p>
+<p>代码见板子。</p>
 
       
     </div>
@@ -343,7 +429,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/dp/" rel="tag"># dp</a>
+            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
           
         </div>
       
@@ -356,8 +442,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/02/17/ZJOI%E7%AC%ACK%E5%A4%A7%E6%9F%A5%E8%AF%A2/" rel="next" title="ZJOI 第K大数查询">
-                <i class="fa fa-chevron-left"></i> ZJOI 第K大数查询
+              <a href="/2020/04/12/CF1334F/" rel="next" title="CF1334F -Strange Function">
+                <i class="fa fa-chevron-left"></i> CF1334F -Strange Function
               </a>
             
           </div>
@@ -366,8 +452,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/02/24/CF1313D/" rel="prev" title="CF1307F E. Cow and Treats">
-                CF1307F E. Cow and Treats <i class="fa fa-chevron-right"></i>
+              <a href="/2020/04/15/P5488/" rel="prev" title="差分与前缀和">
+                差分与前缀和 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -423,8 +509,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -512,6 +607,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FFT"><span class="nav-number">1.</span> <span class="nav-text">FFT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工具-复数"><span class="nav-number">1.1.</span> <span class="nav-text">工具-复数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#点值表达法"><span class="nav-number">1.2.</span> <span class="nav-text">点值表达法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DFT"><span class="nav-number">1.3.</span> <span class="nav-text">DFT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDFT"><span class="nav-number">1.4.</span> <span class="nav-text">IDFT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线代"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">线代</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现"><span class="nav-number">1.5.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#蝴蝶变换"><span class="nav-number">1.5.0.1.</span> <span class="nav-text">蝴蝶变换</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NTT"><span class="nav-number">2.</span> <span class="nav-text">NTT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原根"><span class="nav-number">2.1.</span> <span class="nav-text">原根</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FWT"><span class="nav-number">3.</span> <span class="nav-text">FWT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#or"><span class="nav-number">3.1.</span> <span class="nav-text">$or$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#and"><span class="nav-number">3.2.</span> <span class="nav-text">$and$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xor"><span class="nav-number">3.3.</span> <span class="nav-text">$xor$</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
