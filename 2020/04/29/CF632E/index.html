@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="NaCNer">
 <meta property="og:description" content="从$n$物品个里面取$k$个，有多少种价值组合。">
 <meta property="article:published_time" content="2020-04-29T02:47:00.000Z">
-<meta property="article:modified_time" content="2020-05-03T06:30:36.945Z">
+<meta property="article:modified_time" content="2020-05-26T14:38:43.558Z">
 <meta property="article:author" content="HCN">
 <meta property="article:tag" content="NTT">
 <meta name="twitter:card" content="summary">
@@ -316,7 +316,7 @@
 <p>//const int P = 1e9 + 7;<br>int P = 998244353, gi = 3;<br>const double pi = acos(-1.0);<br>int inc(int x, int y, int mo)<br>{<br>    if (x + y &gt;= mo)<br>        return (x + y - mo);<br>    else<br>        return (x + y);<br>}</p>
 <p>int del(int x, int y, int mo)<br>{<br>    if (x - y &lt; 0)<br>        return (x - y + mo);<br>    else<br>        return (x - y);<br>}<br>int read()<br>{<br>    int x = 0, f = 1;<br>    char c = getchar();<br>    while (c &lt; ‘0’ || c &gt; ‘9’)<br>    {<br>        if (c == ‘-‘)<br>            f = -1;<br>        c = getchar();<br>    }<br>    while (c &gt;= ‘0’ &amp;&amp; c &lt;= ‘9’)<br>        x = (x &lt;&lt; 1) + (x &lt;&lt; 3) + c - ‘0’, c = getchar();<br>    return x * f;<br>}</p>
 <p>int qpow(int a, int x, int mo)<br>{<br>    int res = 1;<br>    while (x)<br>    {<br>        if (x &amp; 1)<br>            res = 1ll <em> res </em> a % mo;<br>        x &gt;&gt;= 1;<br>        a = 1ll <em> a </em> a % mo;<br>    }<br>    return res;<br>}<br>int rev[N];<br>void NTT(int <em>A, int n, int inv)<br>{<br>    for (int i = 0; i &lt; n; i++)<br>        if (i &lt; rev[i])<br>            swap(A[i], A[rev[i]]);<br>    for (int l = 1; l &lt; n; l &lt;&lt;= 1)<br>    {<br>        int tt = qpow(gi, (P - 1) / (l &lt;&lt; 1), P);<br>        int temp = (inv == 1 ? tt : qpow(tt, P - 2, P));<br>        for (int i = 0; i &lt; n; i += (l &lt;&lt; 1))<br>        {<br>            int omega = 1;<br>            for (int j = 0; j &lt; l; j++, omega = 1ll </em> omega <em> temp % P)<br>            {<br>                int x = A[i + j], y = 1ll </em> omega <em> A[i + j + l] % P;<br>                A[i + j] = inc(x, y, P);<br>                A[i + j + l] = del(x, y, P);<br>            }<br>        }<br>    }<br>    int invv = qpow(n, P - 2, P);<br>    if (inv == -1)<br>        for (int i = 0; i &lt; n; i++)<br>            A[i] = 1ll </em> A[i] * invv % P;<br>}</p>
-<p>void QPOWNTTX(int <em>a, int n, int </em>b, int m, int <em>ans)<br>{<br>    int ML = 1, bit = 0;<br>    while (ML &lt;= n + m)<br>        ML &lt;&lt;= 1, bit++;<br>    for (int i = 0; i &lt; ML; i++)<br>        rev[i] = (rev[i &gt;&gt; 1] &gt;&gt; 1) | ((i &amp; 1) &lt;&lt; (bit - 1));<br>    NTT(a, ML, 1);<br>    NTT(b, ML, 1);<br>    for (int i = 0; i &lt; ML; i++)<br>        a[i] = 1ll </em> a[i] <em> b[i] % P;<br>    NTT(a, ML, -1);<br>}<br>int f[N], g[N];<br>int main()<br>{<br>    int n = read(), k = read();<br>    for (int i = 1; i &lt;= n; i++)<br>    {<br>        int x = read();<br>        f[x] = 1;<br>        g[x] = 1;<br>    }<br>    n = 1000 </em> k;<br>    int ML = 1, bit = 0;<br>    while (ML &lt;= n + n)<br>        ML &lt;&lt;= 1, bit++;<br>    for (int i = 0; i &lt; ML; i++)<br>        rev[i] = (rev[i &gt;&gt; 1] &gt;&gt; 1) | ((i &amp; 1) &lt;&lt; (bit - 1));<br>    NTT(f, ML, 1);<br>    for (int i = 0; i &lt; ML; i++)<br>        f[i] = qpow(f[i], k, P) % P;<br>    NTT(f, ML, -1);<br>    P = 1004535809;<br>    NTT(g, ML, 1);<br>    for (int i = 0; i &lt; ML; i++)<br>        g[i] = qpow(g[i], k, P) % P;<br>    NTT(g, ML, -1);<br>    for (int i = 1; i &lt;= n; i++)<br>        if (g[i] | f[i])<br>            printf(“%d “, i);<br>}</p>
+<p>void QPOWNTTX(int <em>a, int n, int </em>b, int m, int <em>ans)<br>{<br>    int ML = 1, bit = 0;<br>    while (ML &lt; n + m)<br>        ML &lt;&lt;= 1, bit++;<br>    for (int i = 0; i &lt; ML; i++)<br>        rev[i] = (rev[i &gt;&gt; 1] &gt;&gt; 1) | ((i &amp; 1) &lt;&lt; (bit - 1));<br>    NTT(a, ML, 1);<br>    NTT(b, ML, 1);<br>    for (int i = 0; i &lt; ML; i++)<br>        a[i] = 1ll </em> a[i] <em> b[i] % P;<br>    NTT(a, ML, -1);<br>}<br>int f[N], g[N];<br>int main()<br>{<br>    int n = read(), k = read();<br>    for (int i = 1; i &lt;= n; i++)<br>    {<br>        int x = read();<br>        f[x] = 1;<br>        g[x] = 1;<br>    }<br>    n = 1000 </em> k;<br>    int ML = 1, bit = 0;<br>    while (ML &lt;= n + n)<br>        ML &lt;&lt;= 1, bit++;<br>    for (int i = 0; i &lt; ML; i++)<br>        rev[i] = (rev[i &gt;&gt; 1] &gt;&gt; 1) | ((i &amp; 1) &lt;&lt; (bit - 1));<br>    NTT(f, ML, 1);<br>    for (int i = 0; i &lt; ML; i++)<br>        f[i] = qpow(f[i], k, P) % P;<br>    NTT(f, ML, -1);<br>    P = 1004535809;<br>    NTT(g, ML, 1);<br>    for (int i = 0; i &lt; ML; i++)<br>        g[i] = qpow(g[i], k, P) % P;<br>    NTT(g, ML, -1);<br>    for (int i = 1; i &lt;= n; i++)<br>        if (g[i] | f[i])<br>            printf(“%d “, i);<br>}</p>
 
       
     </div>
@@ -443,7 +443,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-count">157</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -456,7 +456,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
