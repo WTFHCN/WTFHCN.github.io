@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="NaCNer">
 <meta property="og:description" content="可以有$k$架飞机，$0..N-1$个机场，神犇航空接到了$M$个包机请求，每个请求为在$s$时刻从$a$机场起飞，在恰好$t$时刻到达$b$机场，可以净获利$c$。有机场之间来往的费用与时间">
 <meta property="article:published_time" content="2020-07-15T02:47:00.000Z">
-<meta property="article:modified_time" content="2020-07-19T15:13:38.867Z">
+<meta property="article:modified_time" content="2020-07-19T15:17:06.928Z">
 <meta property="article:author" content="HCN">
 <meta property="article:tag" content="网络流">
 <meta name="twitter:card" content="summary">
@@ -318,74 +318,8 @@
 <li>$t_{ij} &lt;=t_{ik}+t_{kj},f_{ij}&lt;=f_{ik}+f_{kj}$满足最短路，这样上面那个情况就不会发生，完成下一个请求就会好回去。</li>
 </ul>
 <p><details><br>  <summary>代码</summary></p>
-<p>```c++</p>
-<h1 id="include"><a href="#include" class="headerlink" title="include "></a>include <iostream></h1><h1 id="include-1"><a href="#include-1" class="headerlink" title="include "></a>include <cstdio></h1><h1 id="include-2"><a href="#include-2" class="headerlink" title="include "></a>include <algorithm></h1><h1 id="include-3"><a href="#include-3" class="headerlink" title="include "></a>include <queue></h1><h1 id="include-4"><a href="#include-4" class="headerlink" title="include "></a>include <cmath></h1><h1 id="include-5"><a href="#include-5" class="headerlink" title="include "></a>include <cstring></h1><h1 id="include-6"><a href="#include-6" class="headerlink" title="include "></a>include <vector></h1><h1 id="include-7"><a href="#include-7" class="headerlink" title="include "></a>include <map></h1><h1 id="include-8"><a href="#include-8" class="headerlink" title="include "></a>include <stack></h1><p>using namespace std;<br>typedef long long ll;</p>
-<h1 id="define-pii-pair"><a href="#define-pii-pair" class="headerlink" title="define pii pair"></a>define pii pair<int, int></h1><h1 id="define-mk-make-pair"><a href="#define-mk-make-pair" class="headerlink" title="define mk make_pair"></a>define mk make_pair</h1><h1 id="define-INF-0x3f3f3f3f"><a href="#define-INF-0x3f3f3f3f" class="headerlink" title="define INF 0x3f3f3f3f"></a>define INF 0x3f3f3f3f</h1><p>const int N = 200 + 10;<br>const int mod = 1e9 + 7;<br>int read()<br>{<br>int x = 0, f = 1;<br>char c = getchar();<br>while (c &lt; ‘0’ || c &gt; ‘9’)<br>{<br>if (c == ‘-‘)<br>f = -1;<br>c = getchar();<br>}<br>while (c &gt;= ‘0’ &amp;&amp; c &lt;= ‘9’)<br>x = (x &lt;&lt; 1) + (x &lt;&lt; 3) + c - ‘0’, c = getchar();<br>return x * f;<br>}<br>struct Edge<br>{<br>int to, cap, nxt, f;<br>Edge() {}<br>Edge(int v, int c, int t, int k) : to(v), cap(c), nxt(t), f(k) {}<br>};<br>const int EN = 5e3 + 10;<br>const int EM = 5e4 + 10;<br>struct MCMF<br>{</p>
-<pre><code>Edge e[EM &lt;&lt; 1];
-int head[EN], scnt;
-int f[EN], dis[EN], vis[EN];
-pii pre[EN];
-MCMF() { scnt = 1; }
-void addEdge(int u, int v, int w, int k)
-{
-
-    e[++scnt] = Edge(v, w, head[u], k);
-    head[u] = scnt;
-    e[++scnt] = Edge(u, 0, head[v], -k); ///!!!!
-    head[v] = scnt;
-}
-bool spfa(int s, int t)
-{
-    memset(vis, 0, sizeof(vis));
-    memset(dis, INF, sizeof(dis));
-    queue&lt;int&gt; q;
-    dis[s] = 0;
-    vis[s] = 1;
-    f[s] = INF;
-    q.push(s);
-    while (!q.empty())
-    {
-        int x = q.front();
-        q.pop();
-        vis[x] = 0;
-        for (int i = head[x]; i; i = e[i].nxt)
-        {
-            int to = e[i].to;
-
-            if (dis[to] &gt; dis[x] + e[i].f &amp;&amp; e[i].cap)
-            {
-                pre[to] = mk(x, i);
-                dis[to] = dis[x] + e[i].f;
-                f[to] = min(f[x], e[i].cap);
-                if (!vis[to])
-                {
-                    vis[to] = 1;
-                    q.push(to);
-                }
-            }
-        }
-    }
-    return dis[t] != INF;
-}
-pii Maxflow(int s, int t)
-{
-    int flow = 0, res = 0;
-    while (spfa(s, t))
-    {
-
-        for (int u = t; u != s; u = pre[u].first)
-        {
-            e[pre[u].second].cap -= f[t];
-            e[pre[u].second ^ 1].cap += f[t];
-            res += e[pre[u].second].f * f[t];
-        }
-        flow += f[t];
-    }
-    return mk(flow, res);
-}
-</code></pre><p>} mc;<br>struct node<br>{<br>int a, b, s, t, c;<br>} p[N];<br>int ti[N][n], f[N][n];<br>int main()<br>{<br>int n = read(), m = read(), k = read(), T = read();<br>for (int i = 0; i &lt; n; i++)<br>for (int j = 0; j &lt; n; j++)<br>ti[i][j] = read();<br>for (int i = 0; i &lt; n; i++)<br>for (int j = 0; j &lt; n; j++)<br>f[i][j] = read();<br>for (int i = 1; i &lt;= m; i++)<br>p[i].a = read(), p[i].b = read(), p[i].s = read(), p[i].t = read(), p[i].c = read();<br>int cnt = 2 * m;<br>int s = ++cnt, q = ++cnt, t = ++cnt;<br>mc.addEdge(s, q, k, 0);<br>for (int i = 1; i &lt;= m; i++)<br>{<br>mc.addEdge(i, i + m, 1, -p[i].c);<br>if (p[i].t + ti[p[i].b][0] &gt; T)<br>continue;<br>if (p[i].s &gt;= ti[0]p[i].a])<br>mc.addEdge(q, i, INF, f[0]p[i].a]);<br>mc.addEdge(i + m, t, INF, f[p[i].b][0]);<br>for (int j = 1; j &lt;= m; j++)<br>if (p[i].t + ti[p[i].b][p[j].a] &lt;= p[j].s)<br>mc.addEdge(i + m, j, INF, f[p[i].b][p[j].a]);<br>}</p>
-<pre><code>printf(&quot;%d\n&quot;, -mc.Maxflow(s, t).second);
-</code></pre><p>}</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pii pair<span class="meta-string">&lt;int, int&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mk make_pair</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">200</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">char</span> c = getchar();</span><br><span class="line"><span class="keyword">while</span> (c &lt; <span class="string">'0'</span> || c &gt; <span class="string">'9'</span>)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">if</span> (c == <span class="string">'-'</span>)</span><br><span class="line">f = <span class="number">-1</span>;</span><br><span class="line">c = getchar();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span> (c &gt;= <span class="string">'0'</span> &amp;&amp; c &lt;= <span class="string">'9'</span>)</span><br><span class="line">x = (x &lt;&lt; <span class="number">1</span>) + (x &lt;&lt; <span class="number">3</span>) + c - <span class="string">'0'</span>, c = getchar();</span><br><span class="line"><span class="keyword">return</span> x \* f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">int</span> to, cap, nxt, f;</span><br><span class="line">Edge() &#123;&#125;</span><br><span class="line">Edge(<span class="keyword">int</span> v, <span class="keyword">int</span> c, <span class="keyword">int</span> t, <span class="keyword">int</span> k) : to(v), cap(c), nxt(t), f(k) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> EN = <span class="number">5e3</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> EM = <span class="number">5e4</span> + <span class="number">10</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MCMF</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"></span><br><span class="line">    Edge e[EM &lt;&lt; <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">int</span> head[EN], scnt;</span><br><span class="line">    <span class="keyword">int</span> f[EN], dis[EN], vis[EN];</span><br><span class="line">    pii pre[EN];</span><br><span class="line">    MCMF() &#123; scnt = <span class="number">1</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addEdge</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> w, <span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line"></span><br><span class="line">        e[++scnt] = Edge(v, w, head[u], k);</span><br><span class="line">        head[u] = scnt;</span><br><span class="line">        e[++scnt] = Edge(u, <span class="number">0</span>, head[v], -k); <span class="comment">///!!!!</span></span><br><span class="line">        head[v] = scnt;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">spfa</span><span class="params">(<span class="keyword">int</span> s, <span class="keyword">int</span> t)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</span><br><span class="line">        <span class="built_in">memset</span>(dis, INF, <span class="keyword">sizeof</span>(dis));</span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">        dis[s] = <span class="number">0</span>;</span><br><span class="line">        vis[s] = <span class="number">1</span>;</span><br><span class="line">        f[s] = INF;</span><br><span class="line">        q.push(s);</span><br><span class="line">        <span class="keyword">while</span> (!q.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> x = q.front();</span><br><span class="line">            q.pop();</span><br><span class="line">            vis[x] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = head[x]; i; i = e[i].nxt)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> to = e[i].to;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (dis[to] &gt; dis[x] + e[i].f &amp;&amp; e[i].cap)</span><br><span class="line">                &#123;</span><br><span class="line">                    pre[to] = mk(x, i);</span><br><span class="line">                    dis[to] = dis[x] + e[i].f;</span><br><span class="line">                    f[to] = <span class="built_in">min</span>(f[x], e[i].cap);</span><br><span class="line">                    <span class="keyword">if</span> (!vis[to])</span><br><span class="line">                    &#123;</span><br><span class="line">                        vis[to] = <span class="number">1</span>;</span><br><span class="line">                        q.push(to);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dis[t] != INF;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">pii <span class="title">Maxflow</span><span class="params">(<span class="keyword">int</span> s, <span class="keyword">int</span> t)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> flow = <span class="number">0</span>, res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (spfa(s, t))</span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> u = t; u != s; u = pre[u].first)</span><br><span class="line">            &#123;</span><br><span class="line">                e[pre[u].second].cap -= f[t];</span><br><span class="line">                e[pre[u].second ^ <span class="number">1</span>].cap += f[t];</span><br><span class="line">                res += e[pre[u].second].f * f[t];</span><br><span class="line">            &#125;</span><br><span class="line">            flow += f[t];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> mk(flow, res);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125; mc;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">int</span> a, b, s, t, c;</span><br><span class="line">&#125; p[N];</span><br><span class="line"><span class="keyword">int</span> ti[N][n], f[N][n];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> n = <span class="built_in">read</span>(), m = <span class="built_in">read</span>(), k = <span class="built_in">read</span>(), T = <span class="built_in">read</span>();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">ti[i][j] = <span class="built_in">read</span>();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">f[i][j] = <span class="built_in">read</span>();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">p[i].a = <span class="built_in">read</span>(), p[i].b = <span class="built_in">read</span>(), p[i].s = <span class="built_in">read</span>(), p[i].t = <span class="built_in">read</span>(), p[i].c = <span class="built_in">read</span>();</span><br><span class="line"><span class="keyword">int</span> cnt = <span class="number">2</span> \* m;</span><br><span class="line"><span class="keyword">int</span> s = ++cnt, q = ++cnt, t = ++cnt;</span><br><span class="line">mc.addEdge(s, q, k, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">&#123;</span><br><span class="line">mc.addEdge(i, i + m, <span class="number">1</span>, -p[i].c);</span><br><span class="line"><span class="keyword">if</span> (p[i].t + ti[p[i].b][<span class="number">0</span>] &gt; T)</span><br><span class="line"><span class="keyword">continue</span>;</span><br><span class="line"><span class="keyword">if</span> (p[i].s &gt;= ti[<span class="number">0</span>]p[i].a])</span><br><span class="line">mc.addEdge(q, i, INF, f[<span class="number">0</span>]p[i].a]);</span><br><span class="line">mc.addEdge(i + m, t, INF, f[p[i].b][<span class="number">0</span>]);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line"><span class="keyword">if</span> (p[i].t + ti[p[i].b][p[j].a] &lt;= p[j].s)</span><br><span class="line">mc.addEdge(i + m, j, INF, f[p[i].b][p[j].a]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, -mc.Maxflow(s, t).second);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&lt;/details&gt;<br>```</p>
 
       
     </div>
@@ -416,8 +350,8 @@ pii Maxflow(int s, int t)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/03/P1251/" rel="next" title="P1251 餐巾计划问题">
-                <i class="fa fa-chevron-left"></i> P1251 餐巾计划问题
+              <a href="/2020/07/10/CF786B/" rel="next" title="CF786B Legacy">
+                <i class="fa fa-chevron-left"></i> CF786B Legacy
               </a>
             
           </div>
@@ -426,8 +360,8 @@ pii Maxflow(int s, int t)
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2099/01/01/%E6%9D%BF%E5%AD%90/" rel="prev" title="各类板子">
-                各类板子 <i class="fa fa-chevron-right"></i>
+              <a href="/2022/01/01/%E6%9D%BF%E5%AD%90/" rel="prev" title="板子">
+                板子 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -483,17 +417,8 @@ pii Maxflow(int s, int t)
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -512,7 +437,7 @@ pii Maxflow(int s, int t)
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">183</span>
+                  <span class="site-state-item-count">185</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -525,7 +450,7 @@ pii Maxflow(int s, int t)
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -585,22 +510,6 @@ pii Maxflow(int s, int t)
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#include"><span class="nav-number">1.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-1"><span class="nav-number">2.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-2"><span class="nav-number">3.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-3"><span class="nav-number">4.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-4"><span class="nav-number">5.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-5"><span class="nav-number">6.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-6"><span class="nav-number">7.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-7"><span class="nav-number">8.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-8"><span class="nav-number">9.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#define-pii-pair"><span class="nav-number">10.</span> <span class="nav-text">define pii pair</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#define-mk-make-pair"><span class="nav-number">11.</span> <span class="nav-text">define mk make_pair</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#define-INF-0x3f3f3f3f"><span class="nav-number">12.</span> <span class="nav-text">define INF 0x3f3f3f3f</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
