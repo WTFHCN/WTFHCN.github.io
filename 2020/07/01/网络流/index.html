@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="NaCNer">
 <meta property="og:description" content="题目过多，小题直接说，大题单独代码。">
 <meta property="article:published_time" content="2020-07-01T02:47:00.000Z">
-<meta property="article:modified_time" content="2020-07-03T14:04:12.901Z">
+<meta property="article:modified_time" content="2020-07-22T15:30:44.385Z">
 <meta property="article:author" content="HCN">
 <meta property="article:tag" content="网络流">
 <meta name="twitter:card" content="summary">
@@ -306,15 +306,16 @@
       
 
       
-        <p>题目过多，小题直接说，大题单独代码。<br><a id="more"></a></p>
+        <p>题目过多，小题直接说，大题单独代码。</p>
+<a id="more"></a>
 <h2 id="P1231-教辅的组成"><a href="#P1231-教辅的组成" class="headerlink" title="P1231 教辅的组成"></a>P1231 教辅的组成</h2><p>由于一本书只能选一次，所以需要拆点，限制流量$1$,跑个最大流即可。</p>
 <h2 id="P2764-最小路径覆盖问题"><a href="#P2764-最小路径覆盖问题" class="headerlink" title="P2764 最小路径覆盖问题"></a>P2764 最小路径覆盖问题</h2><p>考虑每个点之间的合并可以少一条路径=点数-最大流（最多合并的路径数）。（$u\rightarrow v$即)$Edge(u,v+n)$ ,即试图让一个条路径表示为一个点之间的合并。</p>
 <h2 id="P2774-方格取数问题"><a href="#P2774-方格取数问题" class="headerlink" title="P2774 方格取数问题"></a>P2774 方格取数问题</h2><p>考虑总数值-相邻的。考虑$(i+j) \mod 2$分成个二分图。对于相邻的就是只能在两个值中取一个，连边之后，即是最小割</p>
-<h2 id="P1361-小M的作物"><a href="#P1361-小M的作物" class="headerlink" title="P1361 小M的作物"></a>P1361 小M的作物</h2><p>最小割模版题，总收益-只能选择一种的收益，可以建立虚点把需要一起的搞在一起，然后最小割即可。</p>
+<h2 id="P1361-小-M-的作物"><a href="#P1361-小-M-的作物" class="headerlink" title="P1361 小 M 的作物"></a>P1361 小 M 的作物</h2><p>最小割模版题，总收益-只能选择一种的收益，可以建立虚点把需要一起的搞在一起，然后最小割即可。</p>
 <h2 id="CF311E-Biologist"><a href="#CF311E-Biologist" class="headerlink" title="CF311E Biologist"></a>CF311E Biologist</h2><p>有收益有亏损，直接当作全亏，然后总的+亏本-最小割。</p>
-<p><details><br>  <summary>代码</summary></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>  &lt;/details&gt;i90- </p>
+<h2 id="P3159-CQOI2012-交换棋子"><a href="#P3159-CQOI2012-交换棋子" class="headerlink" title="P3159 [CQOI2012]交换棋子"></a>P3159 [CQOI2012]交换棋子</h2><p>以记录黑色棋子的起始和终结位置，想办法去让棋子从起始位置走到终止位置，一一匹配。保证交互次数拆两个点，但是发现头尾交换次数为$1$,中间为$2$,拆成$3$个点$l,m,r$，这样就可以分摊费用了。注意如果$1-&gt;1,0-&gt;0$。显然会发生偶次数，可以分解。如果$1-&gt;0$,那么进入的那边一定会出去那边大$1$的交换次数，$0-&gt;1$ 反之。</p>
+<h2 id="CF1045A-Last-chance"><a href="#CF1045A-Last-chance" class="headerlink" title="CF1045A Last chance"></a>CF1045A Last chance</h2><p>裸的线段树建图，跑个最大流即可。</p>
+<h2 id="P2153-SDOI2009-晨跑"><a href="#P2153-SDOI2009-晨跑" class="headerlink" title="P2153 [SDOI2009]晨跑"></a>P2153 [SDOI2009]晨跑</h2><p>拆个点，最大流显然是可以跑几次，最短路程显然是最小费用流</p>
 
       
     </div>
@@ -441,7 +442,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">185</span>
+                  <span class="site-state-item-count">190</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -454,7 +455,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -524,7 +525,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#P1231-教辅的组成"><span class="nav-number">1.</span> <span class="nav-text">P1231 教辅的组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2764-最小路径覆盖问题"><span class="nav-number">2.</span> <span class="nav-text">P2764 最小路径覆盖问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2774-方格取数问题"><span class="nav-number">3.</span> <span class="nav-text">P2774 方格取数问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P1361-小M的作物"><span class="nav-number">4.</span> <span class="nav-text">P1361 小M的作物</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CF311E-Biologist"><span class="nav-number">5.</span> <span class="nav-text">CF311E Biologist</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#P1231-教辅的组成"><span class="nav-number">1.</span> <span class="nav-text">P1231 教辅的组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2764-最小路径覆盖问题"><span class="nav-number">2.</span> <span class="nav-text">P2764 最小路径覆盖问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2774-方格取数问题"><span class="nav-number">3.</span> <span class="nav-text">P2774 方格取数问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P1361-小-M-的作物"><span class="nav-number">4.</span> <span class="nav-text">P1361 小 M 的作物</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CF311E-Biologist"><span class="nav-number">5.</span> <span class="nav-text">CF311E Biologist</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P3159-CQOI2012-交换棋子"><span class="nav-number">6.</span> <span class="nav-text">P3159 [CQOI2012]交换棋子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CF1045A-Last-chance"><span class="nav-number">7.</span> <span class="nav-text">CF1045A Last chance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2153-SDOI2009-晨跑"><span class="nav-number">8.</span> <span class="nav-text">P2153 [SDOI2009]晨跑</span></a></li></ol></div>
             
 
           </div>
