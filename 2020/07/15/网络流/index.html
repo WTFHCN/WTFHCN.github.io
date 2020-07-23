@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="网络流," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="NaCNer" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="题目过多，小题直接说，大题单独代码。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络流一句话题解">
+<meta property="og:url" content="http://yoursite.com/2020/07/15/%E7%BD%91%E7%BB%9C%E6%B5%81/index.html">
+<meta property="og:site_name" content="NaCNer">
+<meta property="og:description" content="题目过多，小题直接说，大题单独代码。">
+<meta property="article:published_time" content="2020-07-15T02:47:00.000Z">
+<meta property="article:modified_time" content="2020-07-23T16:01:18.309Z">
+<meta property="article:author" content="HCN">
+<meta property="article:tag" content="网络流">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/07/15/网络流/"/>
+
+
+
+
+
+  <title>网络流一句话题解 | NaCNer</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">NaCNer</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/15/%E7%BD%91%E7%BB%9C%E6%B5%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HCN">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NaCNer">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">网络流一句话题解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-15T10:47:00+08:00">
+                2020-07-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>  阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>题目过多，小题直接说，大题单独代码。</p>
+<a id="more"></a>
+<h2 id="P1231-教辅的组成"><a href="#P1231-教辅的组成" class="headerlink" title="P1231 教辅的组成"></a>P1231 教辅的组成</h2><p>由于一本书只能选一次，所以需要拆点，限制流量$1$,跑个最大流即可。</p>
+<h2 id="P2764-最小路径覆盖问题"><a href="#P2764-最小路径覆盖问题" class="headerlink" title="P2764 最小路径覆盖问题"></a>P2764 最小路径覆盖问题</h2><p>考虑每个点之间的合并可以少一条路径=点数-最大流（最多合并的路径数）。（$u\rightarrow v$即)$Edge(u,v+n)$ ,即试图让一个条路径表示为一个点之间的合并。</p>
+<h2 id="P2774-方格取数问题"><a href="#P2774-方格取数问题" class="headerlink" title="P2774 方格取数问题"></a>P2774 方格取数问题</h2><p>考虑总数值-相邻的。考虑$(i+j) \mod 2$分成个二分图。对于相邻的就是只能在两个值中取一个，连边之后，即是最小割</p>
+<h2 id="P1361-小-M-的作物"><a href="#P1361-小-M-的作物" class="headerlink" title="P1361 小 M 的作物"></a>P1361 小 M 的作物</h2><p>最小割模版题，总收益-只能选择一种的收益，可以建立虚点把需要一起的搞在一起，然后最小割即可。</p>
+<h2 id="CF311E-Biologist"><a href="#CF311E-Biologist" class="headerlink" title="CF311E Biologist"></a>CF311E Biologist</h2><p>有收益有亏损，直接当作全亏，然后总的+亏本-最小割。</p>
+<h2 id="P3159-CQOI2012-交换棋子"><a href="#P3159-CQOI2012-交换棋子" class="headerlink" title="P3159 [CQOI2012]交换棋子"></a>P3159 [CQOI2012]交换棋子</h2><p>以记录黑色棋子的起始和终结位置，想办法去让棋子从起始位置走到终止位置，一一匹配。保证交互次数拆两个点，但是发现头尾交换次数为$1$,中间为$2$,拆成$3$个点$l,m,r$，这样就可以分摊费用了。注意如果$1-&gt;1,0-&gt;0$。显然会发生偶次数，可以分解。如果$1-&gt;0$,那么进入的那边一定会出去那边大$1$的交换次数，$0-&gt;1$ 反之。</p>
+<h2 id="CF1045A-Last-chance"><a href="#CF1045A-Last-chance" class="headerlink" title="CF1045A Last chance"></a>CF1045A Last chance</h2><p>裸的线段树建图，跑个最大流即可。</p>
+<h2 id="P2153-SDOI2009-晨跑"><a href="#P2153-SDOI2009-晨跑" class="headerlink" title="P2153 [SDOI2009]晨跑"></a>P2153 [SDOI2009]晨跑</h2><p>拆个点，最大流显然是可以跑几次，最短路程显然是最小费用流</p>
+<h2 id="CF277E-Binary-Tree-on-Plane"><a href="#CF277E-Binary-Tree-on-Plane" class="headerlink" title="CF277E Binary Tree on Plane"></a>CF277E Binary Tree on Plane</h2><p>显然树上点看成$i-&gt;j$这样子的话，就显然分成入点和出点，然后只能$(s,i)$流量为$2$，$(i,t)$为$1$，限制下，然后路径就是权值，跑个最小费用流即可</p>
+<h2 id="P3358-最长k可重区间集问题"><a href="#P3358-最长k可重区间集问题" class="headerlink" title="P3358 最长k可重区间集问题"></a>P3358 最长k可重区间集问题</h2><p>板子题，注意区间需要开闭合。则为了限制，有$k$个区间覆盖，则$[l,r)$流量为$1$，但是路径$(i,i+1)$流量为$k$表示分配流量可以为$k$,然后到了拐角，显然就需要分配流量，然后再回来的时候$r$处恢复流量，跑个最大费用流</p>
+<h2 id="P3357-最长k可重线段集问题"><a href="#P3357-最长k可重线段集问题" class="headerlink" title="P3357 最长k可重线段集问题"></a>P3357 最长k可重线段集问题</h2><p>能产生影响的是线段是可以垂直于x轴的，这样就很麻烦。我们采用拆点的策略解决这个问题，扩大两倍分成入点和出点，解决事情。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/" rel="tag"># 网络流</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/15/P4452/" rel="next" title="P4452 [国家集训队]航班安排">
+                <i class="fa fa-chevron-left"></i> P4452 [国家集训队]航班安排
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/20/CF1379F/" rel="prev" title="CF1379F2 Chess Strikes Back (hard version)">
+                CF1379F2 Chess Strikes Back (hard version) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/1.jpg"
+                alt="HCN" />
+            
+              <p class="site-author-name" itemprop="name">HCN</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">192</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/Isaunoya/" title="Isaunoya" target="_blank">Isaunoya</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://sher-wu.github.io/" title="sher-wu" target="_blank">sher-wu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/Code92007" title="Yzm007" target="_blank">Yzm007</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://dickxyz.github.io/" title="Dick" target="_blank">Dick</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xsxszab.github.io" title="xsxszab" target="_blank">xsxszab</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#P1231-教辅的组成"><span class="nav-number">1.</span> <span class="nav-text">P1231 教辅的组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2764-最小路径覆盖问题"><span class="nav-number">2.</span> <span class="nav-text">P2764 最小路径覆盖问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2774-方格取数问题"><span class="nav-number">3.</span> <span class="nav-text">P2774 方格取数问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P1361-小-M-的作物"><span class="nav-number">4.</span> <span class="nav-text">P1361 小 M 的作物</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CF311E-Biologist"><span class="nav-number">5.</span> <span class="nav-text">CF311E Biologist</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P3159-CQOI2012-交换棋子"><span class="nav-number">6.</span> <span class="nav-text">P3159 [CQOI2012]交换棋子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CF1045A-Last-chance"><span class="nav-number">7.</span> <span class="nav-text">CF1045A Last chance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2153-SDOI2009-晨跑"><span class="nav-number">8.</span> <span class="nav-text">P2153 [SDOI2009]晨跑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CF277E-Binary-Tree-on-Plane"><span class="nav-number">9.</span> <span class="nav-text">CF277E Binary Tree on Plane</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P3358-最长k可重区间集问题"><span class="nav-number">10.</span> <span class="nav-text">P3358 最长k可重区间集问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P3357-最长k可重线段集问题"><span class="nav-number">11.</span> <span class="nav-text">P3357 最长k可重线段集问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HCN</span>
+
+  
+
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
