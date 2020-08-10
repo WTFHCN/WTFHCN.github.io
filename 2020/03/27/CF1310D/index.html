@@ -81,14 +81,14 @@
 
 
 
-<meta name="description" content="$𝑛≤80$个点完全有向连通图，走𝑘步回到起点1且没有奇环，求最小代价    代码  123456789101112131415161718192021222324252627282930313233343536373839#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;algorithm&gt;#include &amp;lt">
+<meta name="description" content="$𝑛≤80$个点完全有向连通图，走𝑘步回到起点1且没有奇环，求最小代价">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CF1301F - Super Jaber">
 <meta property="og:url" content="http://yoursite.com/2020/03/27/CF1310D/index.html">
 <meta property="og:site_name" content="NaCNer">
-<meta property="og:description" content="$𝑛≤80$个点完全有向连通图，走𝑘步回到起点1且没有奇环，求最小代价    代码  123456789101112131415161718192021222324252627282930313233343536373839#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;algorithm&gt;#include &amp;lt">
+<meta property="og:description" content="$𝑛≤80$个点完全有向连通图，走𝑘步回到起点1且没有奇环，求最小代价">
 <meta property="article:published_time" content="2020-03-27T02:47:00.000Z">
-<meta property="article:modified_time" content="2020-08-04T04:02:13.056Z">
+<meta property="article:modified_time" content="2020-08-04T13:47:45.245Z">
 <meta property="article:author" content="HCN">
 <meta property="article:tag" content="随机化">
 <meta name="twitter:card" content="summary">
@@ -306,7 +306,9 @@
       
 
       
-        <p>$𝑛≤80$个点完全有向连通图，走𝑘步回到起点1且没有奇环，求最小代价</p>
+        <p>$𝑛≤80$个点完全有向连通图，走𝑘步回到起点1且没有奇环，求最小代价<br><a id="more"></a></p>
+<p>没有奇环，考虑染色。所以我们可以把图染色成一个二分图，在二分图上跑dp就行。一定就是偶数环。</p>
+<p>选中的概率是$(\frac{1}{2})^{10}$,多跑几次就好了。</p>
 <details>
   <summary>代码</summary>
 
@@ -428,7 +430,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">195</span>
+                  <span class="site-state-item-count">198</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -441,7 +443,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

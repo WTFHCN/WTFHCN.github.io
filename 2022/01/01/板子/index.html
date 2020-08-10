@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://cfrating.ihcr.top/?user=WaluntOvO">
 <meta property="og:image" content="http://cfrating.ihcr.top/?user=NaCNerer">
 <meta property="article:published_time" content="2022-01-01T02:47:00.000Z">
-<meta property="article:modified_time" content="2020-07-25T13:00:44.314Z">
+<meta property="article:modified_time" content="2020-08-05T04:38:30.235Z">
 <meta property="article:author" content="HCN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://cfrating.ihcr.top/?user=WaluntOvO">
@@ -309,9 +309,10 @@
 
       
         <p>整理</p>
-<p><img src="http://cfrating.ihcr.top/?user=WaluntOvO" alt=""></p>
-<p><img src="http://cfrating.ihcr.top/?user=NaCNerer" alt=""></p>
+<p><a href="&quot;https://codeforces.ml/profile/WaluntOvO&quot;"><img src="http://cfrating.ihcr.top/?user=WaluntOvO" alt=""></a></p>
+<p><a href="&quot;https://codeforces.ml/profile/NaCNerer&quot;"><img src="http://cfrating.ihcr.top/?user=NaCNerer" alt=""></a></p>
 <a id="more"></a>
+<p>[TOP]</p>
 <h1 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h1><h2 id="unordered-map"><a href="#unordered-map" class="headerlink" title="unordered_map"></a>unordered_map</h2><h2 id="快速-mod"><a href="#快速-mod" class="headerlink" title="快速$mod$"></a>快速$mod$</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">inc</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123; <span class="keyword">return</span> (x + y &gt;= mod) ? (x + y - mod) : (x + y); &#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123; <span class="keyword">return</span> (x - y &lt; <span class="number">0</span>) ? (x - y + mod) : (x - y); &#125;</span><br><span class="line"><span class="function">ll <span class="title">mult</span><span class="params">(ll a, ll b, <span class="keyword">const</span> ll &amp;mo)</span></span>&#123;a %= mo, b %= mo;<span class="keyword">return</span> (a * b - (ll)(((lb)a * b + <span class="number">0.5</span>) / mo) * mo) % mo;&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">qpow</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> x, <span class="keyword">int</span> mo)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (x)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (x &amp; <span class="number">1</span>)</span><br><span class="line">            res = <span class="number">1l</span>l * res * a % mo;</span><br><span class="line">        a = <span class="number">1l</span>l * a * a % mo;</span><br><span class="line">        x &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="快速乘"><a href="#快速乘" class="headerlink" title="快速乘"></a>快速乘</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">ksc</span><span class="params">(ll x,ll y,ll mod)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (x*y-(ll)((<span class="keyword">long</span> <span class="keyword">double</span>)x/mod*y)*mod+mod)%mod;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -496,7 +497,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">195</span>
+                  <span class="site-state-item-count">198</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -509,7 +510,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
