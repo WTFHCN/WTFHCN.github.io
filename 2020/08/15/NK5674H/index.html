@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="NTT," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="NaCNer" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="给定$m$个字符以及他们的权值$v[i]$。 再给定一个长度为$n$字符串$s$，让你求所有长度为$n+k$的字符串的权值乘积总和（删除$k$个后为$s$)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2020牛客暑期多校训练营（第九场）H.Groundhog Speaking Groundhogish">
+<meta property="og:url" content="http://yoursite.com/2020/08/15/NK5674H/index.html">
+<meta property="og:site_name" content="NaCNer">
+<meta property="og:description" content="给定$m$个字符以及他们的权值$v[i]$。 再给定一个长度为$n$字符串$s$，让你求所有长度为$n+k$的字符串的权值乘积总和（删除$k$个后为$s$)">
+<meta property="article:published_time" content="2020-08-15T02:47:00.000Z">
+<meta property="article:modified_time" content="2020-08-18T06:43:36.690Z">
+<meta property="article:author" content="HCN">
+<meta property="article:tag" content="NTT">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/08/15/NK5674H/"/>
+
+
+
+
+
+  <title>2020牛客暑期多校训练营（第九场）H.Groundhog Speaking Groundhogish | NaCNer</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">NaCNer</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/15/NK5674H/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HCN">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NaCNer">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2020牛客暑期多校训练营（第九场）H.Groundhog Speaking Groundhogish</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-15T10:47:00+08:00">
+                2020-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>  阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>给定$m$个字符以及他们的权值$v[i]$。</p>
+<p>再给定一个长度为$n$字符串$s$，让你求所有长度为$n+k$的字符串的权值乘积总和（删除$k$个后为$s$)<br><a id="more"></a></p>
+<p>$abc$-&gt;$aabc$，可以有两种添加方式，若我们每次$i$的右边，即可添加的字符为$m-1$个,权值合$\sum_{s_i!=j}v_j$.</p>
+<ul>
+<li>问题就转化为$n+1$种背包,每个背包权值为$w_i$,选择$k$个背包求权值总和.</li>
+</ul>
+<p>$\rightarrow (1+w_1x+w_1^2x^2+)…(1+w_ix+w_i^2x^2)-&gt;\prod \frac{1}{1-w_ix}$</p>
+<p>可以分母分治$NTT$，然后取个倒数 。$(NTT)真的神奇$。</p>
+<p>注意</p>
+<ul>
+<li>注意控制$NTT$边界，不然复杂度会蝴蝶效应般增大。</li>
+</ul>
+<p><details><br>  <summary>代码</summary></p>
+<p>```c++</p>
+<h1 id="include"><a href="#include" class="headerlink" title="include "></a>include <iostream></h1><h1 id="include-1"><a href="#include-1" class="headerlink" title="include "></a>include <cstdio></h1><h1 id="include-2"><a href="#include-2" class="headerlink" title="include "></a>include <algorithm></h1><h1 id="include-3"><a href="#include-3" class="headerlink" title="include "></a>include <queue></h1><h1 id="include-4"><a href="#include-4" class="headerlink" title="include "></a>include <cmath></h1><h1 id="include-5"><a href="#include-5" class="headerlink" title="include "></a>include <cstring></h1><h1 id="include-6"><a href="#include-6" class="headerlink" title="include "></a>include <vector></h1><h1 id="include-7"><a href="#include-7" class="headerlink" title="include "></a>include <map></h1><h1 id="include-8"><a href="#include-8" class="headerlink" title="include "></a>include <stack></h1><p>using namespace std;<br>typedef long long ll;</p>
+<h1 id="define-pii-pair"><a href="#define-pii-pair" class="headerlink" title="define pii pair"></a>define pii pair<int, int></h1><h1 id="define-mk-make-pair"><a href="#define-mk-make-pair" class="headerlink" title="define mk make_pair"></a>define mk make_pair</h1><p>const int N = (1 &lt;&lt; 19) + 10;<br>const int mod = 998244353;<br>const int P = 998244353, gi = 3;<br>// const double pi = acos(-1.0);<br>int inc(int x, int y) { return (x + y &gt;= mod) ? (x + y - mod) : (x + y); }<br>int del(int x, int y) { return (x - y &lt; 0) ? (x - y + mod) : (x - y); }<br>int read()<br>{<br>    int x = 0, f = 1;<br>    char c = getchar();<br>    while (c &lt; ‘0’ || c &gt; ‘9’)<br>    {<br>        if (c == ‘-‘)<br>            f = -1;<br>        c = getchar();<br>    }<br>    while (c &gt;= ‘0’ &amp;&amp; c &lt;= ‘9’)<br>        x = (x &lt;&lt; 1) + (x &lt;&lt; 3) + c - ‘0’, c = getchar();<br>    return x * f;<br>}</p>
+<p>int qpow(int a, int x, int mo)<br>{<br>    int res = 1;<br>    while (x)<br>    {<br>        if (x &amp; 1)<br>            res = 1ll <em> res </em> a % mo;<br>        x &gt;&gt;= 1;<br>        a = 1ll <em> a </em> a % mo;<br>    }<br>    return res;<br>}</p>
+<p>int rev[N];<br>void NTT(int <em>A, int n, int inv)<br>{<br>    for (int i = 0; i &lt; n; i++)<br>        if (i &lt; rev[i])<br>            swap(A[i], A[rev[i]]);<br>    for (int l = 1; l &lt; n; l &lt;&lt;= 1)<br>    {<br>        int tt = qpow(gi, (P - 1) / (l &lt;&lt; 1), P);<br>        int temp = (inv == 1 ? tt : qpow(tt, P - 2, P));<br>        for (int i = 0; i &lt; n; i += (l &lt;&lt; 1))<br>        {<br>            int omega = 1;<br>            for (int j = 0; j &lt; l; j++, omega = 1ll </em> omega <em> temp % P)<br>            {<br>                int x = A[i + j], y = 1ll </em> omega <em> A[i + j + l] % P;<br>                A[i + j] = inc(x, y);<br>                A[i + j + l] = del(x, y);<br>            }<br>        }<br>    }<br>    int invv = qpow(n, P - 2, P);<br>    if (inv == -1)<br>        for (int i = 0; i &lt; n; i++)<br>            A[i] = 1ll </em> A[i] * invv % P;<br>}</p>
+<p>int Inv2;<br>int C[N], D[N];<br>int Ployinit(int n, int m)<br>{<br>    int ML = 1, bit = 0;<br>    while (ML &lt; n + m - 1)<br>        ML &lt;&lt;= 1, bit++;<br>    return ML;<br>}<br>void NTTX(int <em>a, int n, int </em>b, int m)<br>{<br>    int ML = 1, bit = 0;<br>    while (ML &lt; n + m - 1)<br>        ML &lt;&lt;= 1, bit++;<br>    for (int i = 0; i &lt; ML; i++)<br>        rev[i] = (rev[i &gt;&gt; 1] &gt;&gt; 1) | ((i &amp; 1) &lt;&lt; (bit - 1));<br>    NTT(a, ML, 1);<br>    NTT(b, ML, 1);<br>    for (int i = 0; i &lt; ML; i++)<br>        a[i] = 1ll <em> a[i] </em> b[i] % P;<br>    NTT(a, ML, -1);<br>}<br>void Finv(int <em>a, int </em>b, int n)<br>{<br>    b[0] = qpow(a[0], P - 2, P);<br>    int len, ML;<br>    memset(C, 0, sizeof(C));<br>    memset(D, 0, sizeof(D));<br>    for (len = 1; len &lt; (n &lt;&lt; 1); len &lt;&lt;= 1)<br>    {<br>        ML = len &lt;&lt; 1;<br>        for (int i = 0; i &lt; len; i++)<br>            C[i] = a[i], D[i] = b[i];<br>        for (int i = 0; i &lt; ML; i++)<br>            rev[i] = (rev[i &gt;&gt; 1] &gt;&gt; 1) | ((i &amp; 1) ? len : 0);<br>        NTT(C, ML, 1), NTT(D, ML, 1);<br>        for (int i = 0; i &lt; ML; i++)<br>            b[i] = ((2ll - 1ll <em> C[i] </em> D[i] % P) * D[i] % P + P) % P;<br>        NTT(b, ML, -1);<br>        for (int i = len; i &lt; ML; i++)<br>            b[i] = 0;<br>    }</p>
+<pre><code>for (int i = n; i &lt; len; i++)
+    b[i] = 0;
+</code></pre><p>}<br>int cnt = 0;</p>
+<p>vector<int> g[N];<br>int p[N], v[N];<br>int k;<br>int p1[N], p2[N];<br>int solve(int l, int r)<br>{<br>    if (l == r)<br>        return l;<br>    int mid = (l + r) &gt;&gt; 1;<br>    int pa = solve(l, mid);<br>    int pb = solve(mid + 1, r);<br>    int len1 = g[pa].size();<br>    int len2 = g[pb].size();<br>    int ML = Ployinit(len1, len2);<br>    for (int i = 0; i &lt; ML; i++)<br>        p1[i] = p2[i] = 0;<br>    for (int i = 0; i &lt; len1; i++)<br>        p1[i] = g[pa][i];<br>    for (int i = 0; i &lt; len2; i++)<br>        p2[i] = g[pb][i];</p>
+<pre><code>NTTX(p1, len1, p2, len2);
+
+g[pa].clear();
+int li = min(k + 1, len1 + len2 - 1);
+for (int i = 0; i &lt; li; i++)
+    g[pa].push_back(p1[i]);
+return pa;
+</code></pre><p>}</p>
+<p>int main()<br>{<br>    int n, m;<br>    while (scanf(“%d %d %d”, &amp;n, &amp;m, &amp;k))<br>    {<br>        if (n + m + k &lt;= 0)<br>            break;</p>
+<pre><code>    int sum = 0;
+
+    for (int i = 1; i &lt;= n; i++)
+        p[i] = read();
+    for (int i = 1; i &lt;= m; i++)
+        v[i] = read(), sum = inc(sum, v[i]);
+    cnt = n;
+    for (int i = 0; i &lt;= n; i++)
+    {
+        g[i].clear();
+        g[i].push_back(1);
+        g[i].push_back(del(mod, del(sum, v[p[i]])));
+    }
+    int pa = solve(0, n);
+    memset(p1, 0, sizeof(p1));
+    memset(p2, 0, sizeof(p2));
+    g[pa].resize(k + 1);
+    int len1 = g[pa].size();
+
+    for (int i = 0; i &lt; len1; i++)
+        p1[i] = g[pa][i];
+
+    Finv(p1, p2, k + 1);
+    int ans = 0;
+
+    for (int i = 0; i &lt;= k; i++)
+        ans = inc(ans, p2[i]);
+    for (int i = 1; i &lt;= n; i++)
+        ans = 1ll * ans * v[p[i]] % mod;
+
+    printf(&quot;%d\n&quot;, ans);
+}
+
+return 0;
+</code></pre><p>}</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NTT/" rel="tag"># NTT</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/08/10/P5787/" rel="next" title="P5787 二分图 /【模板】线段树分治">
+                <i class="fa fa-chevron-left"></i> P5787 二分图 /【模板】线段树分治
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/08/17/NK5674D/" rel="prev" title="2020牛客暑期多校训练营（第九场）D.Groundhog and Golden Apple">
+                2020牛客暑期多校训练营（第九场）D.Groundhog and Golden Apple <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/1.jpg"
+                alt="HCN" />
+            
+              <p class="site-author-name" itemprop="name">HCN</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">204</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/Isaunoya/" title="Isaunoya" target="_blank">Isaunoya</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://sher-wu.github.io/" title="sher-wu" target="_blank">sher-wu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/Code92007" title="Yzm007" target="_blank">Yzm007</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://dickxyz.github.io/" title="Dick" target="_blank">Dick</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xsxszab.github.io" title="xsxszab" target="_blank">xsxszab</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#include"><span class="nav-number">1.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-1"><span class="nav-number">2.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-2"><span class="nav-number">3.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-3"><span class="nav-number">4.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-4"><span class="nav-number">5.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-5"><span class="nav-number">6.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-6"><span class="nav-number">7.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-7"><span class="nav-number">8.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-8"><span class="nav-number">9.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#define-pii-pair"><span class="nav-number">10.</span> <span class="nav-text">define pii pair</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#define-mk-make-pair"><span class="nav-number">11.</span> <span class="nav-text">define mk make_pair</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HCN</span>
+
+  
+
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
