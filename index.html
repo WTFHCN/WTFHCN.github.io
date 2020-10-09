@@ -439,6 +439,16 @@
 <li>直径看清楚是否需要$-1$</li>
 <li>虚树注意清空该清空的</li>
 <li>多维$dp$转移注意边界</li>
+<li>后缀树上$lcp(i,j)=len(lca(i,j))$</li>
+<li>全排列二项式定理，也要考虑单独概率考虑</li>
+<li>随机化使用$std::mt19937 rnd(std::chrono::steady_clock::now().time_since_epoch().count());$</li>
+<li>树链剖分注意$top[rt]$，注意$w[dfn[x]]$</li>
+<li>$KruskalTree重构树$开两倍空间。</li>
+<li>负数向下取整$&gt;&gt;1$</li>
+<li>$KruskalTree重构树$是特胖叶子节点$g[x].size()\leq 1$!!,可以减少特胖</li>
+<li>字典序表示先字母大小再长度</li>
+<li>二分图的最大团=补图的最大独立集。，最大独立集=所有顶点数-最小顶点覆盖，最小顶点覆盖等于二分图的最大匹配。</li>
+<li>Boruvka算法快。</li>
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
@@ -687,18 +697,14 @@
 
       
         
-          
-            <h2 id="C"><a href="#C" class="headerlink" title="C"></a>C</h2><p>注意是删除连续一段，前面的删除办法是$\sum_{i=1}^{pre} i$,后面的删除的贡献是$\sum 10^i \times (suf-(suf-i)+1=\sum_{i=0}^{suf} (x+i)10^i$,注意边界即可。</p>
-<h2 id="D"><a href="#D" class="headerlink" title="D"></a>D</h2><p>行，竖建点，注意离散化，以及起点可以随意跳跃，终点不可以</p>
-<h2 id="E"><a href="#E" class="headerlink" title="E"></a>E</h2><p>考虑贪心</p>
-<ul>
-<li>$s[i]\not ={s[i+1]}$，直接加上。</li>
-<li>$s[i] ={s[i+1]}$，不等于很好抉择，相等的话，考虑$11223,33321,3333321$，决定是否添加因素是$ans[i+2]$是否具备第一个字符$&gt;$第二个不同字符。这是可以传递的。$33321$显然符合。</li>
-<li>注意要传递的同时，如果发生第一个字符不等于第二个字符需要重新特判。</li>
-</ul>
-<h2 id="F"><a href="#F" class="headerlink" title="F"></a>F</h2><p>只会$O(kq\log n+ q\log^2n),k=66$,小质数暴力动态线段树或者$short$线段树。大质数只会出现一次，可以考虑区间不同数的主席树的做法。$\sum_l^r [last[i]&lt;l] sum[i]$。</p>
-
-          
+          <p>Codeforces Round 675 (Div. 2)<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/10/08/CR675/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
