@@ -230,133 +230,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/01/01/%E6%9D%BF%E5%AD%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="HCN">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/1.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NaCNer">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/01/01/%E6%9D%BF%E5%AD%90/" itemprop="url">板子</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-01T10:47:00+08:00">
-                2022-01-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>整理</p>
-<p><a href="&quot;https://codeforces.ml/profile/WaluntOvO&quot;"><img src="http://cfrating.ihcr.top/?user=WaluntOvO" alt=""></a></p>
-<p><a href="&quot;https://codeforces.ml/profile/NaCNerer&quot;"><img src="http://cfrating.ihcr.top/?user=NaCNerer" alt=""></a></p>
-<p><a href="&quot;https://codeforces.ml/profile/misakicoca&quot;"><img src="http://cfrating.ihcr.top/?user=misakicoca" alt=""></a></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2022/01/01/%E6%9D%BF%E5%AD%90/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/31/%E4%B8%80%E4%BA%9B%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -566,7 +439,7 @@
 <li>多维$dp$转移注意边界</li>
 <li>后缀树上$lcp(i,j)=len(lca(i,j))$</li>
 <li>全排列二项式定理，也要考虑单独概率考虑</li>
-<li>随机化使用$std::mt19937 rnd(std::chrono::steady_clock::now().time_since_epoch().count());$</li>
+<li>随机化使用std::mt19937 rnd(std::chrono::steady_clock::now().time_since_epoch().count())</li>
 <li>树链剖分注意$top[rt]$，注意$w[dfn[x]]$</li>
 <li>$KruskalTree重构树$开两倍空间。</li>
 <li>负数向下取整$&gt;&gt;1$</li>
@@ -1346,6 +1219,136 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/28/CF455D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HCN">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NaCNer">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/10/28/CF455D/" itemprop="url">CF455D.Serega and Fun</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-28T10:47:00+08:00">
+                2020-10-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>给你一个序列，在线地支持两个操作：</p>
+<ul>
+<li><p>将一个区间循环移位。</p>
+</li>
+<li><p>查询一个区间中某个数出现的次数。</p>
+</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/10/28/CF455D/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/25/CF1437F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1635,7 +1638,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">256</span>
+                  <span class="site-state-item-count">257</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1648,7 +1651,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-count">81</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
