@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="NaCNer">
 <meta property="og:description" content="给定$m$个字符以及他们的权值$v[i]$。 再给定一个长度为$n$字符串$s$，让你求所有长度为$n+k$的字符串的权值乘积总和（删除$k$个后为$s$)">
 <meta property="article:published_time" content="2020-08-15T02:47:00.000Z">
-<meta property="article:modified_time" content="2020-08-18T06:43:36.690Z">
+<meta property="article:modified_time" content="2021-01-04T13:04:36.465Z">
 <meta property="article:author" content="HCN">
 <meta property="article:tag" content="NTT">
 <meta name="twitter:card" content="summary">
@@ -320,7 +320,7 @@
 </ul>
 <p><details><br>  <summary>代码</summary></p>
 <p>```c++</p>
-<h1 id="include"><a href="#include" class="headerlink" title="include "></a>include <iostream></h1><h1 id="include-1"><a href="#include-1" class="headerlink" title="include "></a>include <cstdio></h1><h1 id="include-2"><a href="#include-2" class="headerlink" title="include "></a>include <algorithm></h1><h1 id="include-3"><a href="#include-3" class="headerlink" title="include "></a>include <queue></h1><h1 id="include-4"><a href="#include-4" class="headerlink" title="include "></a>include <cmath></h1><h1 id="include-5"><a href="#include-5" class="headerlink" title="include "></a>include <cstring></h1><h1 id="include-6"><a href="#include-6" class="headerlink" title="include "></a>include <vector></h1><h1 id="include-7"><a href="#include-7" class="headerlink" title="include "></a>include <map></h1><h1 id="include-8"><a href="#include-8" class="headerlink" title="include "></a>include <stack></h1><p>using namespace std;<br>typedef long long ll;</p>
+<h1 id="include"><a href="#include" class="headerlink" title="include "></a>include <bits/stdc++.h></h1><p>using namespace std;<br>typedef long long ll;</p>
 <h1 id="define-pii-pair"><a href="#define-pii-pair" class="headerlink" title="define pii pair"></a>define pii pair<int, int></h1><h1 id="define-mk-make-pair"><a href="#define-mk-make-pair" class="headerlink" title="define mk make_pair"></a>define mk make_pair</h1><p>const int N = (1 &lt;&lt; 19) + 10;<br>const int mod = 998244353;<br>const int P = 998244353, gi = 3;<br>// const double pi = acos(-1.0);<br>int inc(int x, int y) { return (x + y &gt;= mod) ? (x + y - mod) : (x + y); }<br>int del(int x, int y) { return (x - y &lt; 0) ? (x - y + mod) : (x - y); }<br>int read()<br>{<br>    int x = 0, f = 1;<br>    char c = getchar();<br>    while (c &lt; ‘0’ || c &gt; ‘9’)<br>    {<br>        if (c == ‘-‘)<br>            f = -1;<br>        c = getchar();<br>    }<br>    while (c &gt;= ‘0’ &amp;&amp; c &lt;= ‘9’)<br>        x = (x &lt;&lt; 1) + (x &lt;&lt; 3) + c - ‘0’, c = getchar();<br>    return x * f;<br>}</p>
 <p>int qpow(int a, int x, int mo)<br>{<br>    int res = 1;<br>    while (x)<br>    {<br>        if (x &amp; 1)<br>            res = 1ll <em> res </em> a % mo;<br>        x &gt;&gt;= 1;<br>        a = 1ll <em> a </em> a % mo;<br>    }<br>    return res;<br>}</p>
 <p>int rev[N];<br>void NTT(int <em>A, int n, int inv)<br>{<br>    for (int i = 0; i &lt; n; i++)<br>        if (i &lt; rev[i])<br>            swap(A[i], A[rev[i]]);<br>    for (int l = 1; l &lt; n; l &lt;&lt;= 1)<br>    {<br>        int tt = qpow(gi, (P - 1) / (l &lt;&lt; 1), P);<br>        int temp = (inv == 1 ? tt : qpow(tt, P - 2, P));<br>        for (int i = 0; i &lt; n; i += (l &lt;&lt; 1))<br>        {<br>            int omega = 1;<br>            for (int j = 0; j &lt; l; j++, omega = 1ll </em> omega <em> temp % P)<br>            {<br>                int x = A[i + j], y = 1ll </em> omega <em> A[i + j + l] % P;<br>                A[i + j] = inc(x, y);<br>                A[i + j + l] = del(x, y);<br>            }<br>        }<br>    }<br>    int invv = qpow(n, P - 2, P);<br>    if (inv == -1)<br>        for (int i = 0; i &lt; n; i++)<br>            A[i] = 1ll </em> A[i] * invv % P;<br>}</p>
@@ -499,7 +499,7 @@ return 0;
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">269</span>
+                  <span class="site-state-item-count">270</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -582,7 +582,7 @@ return 0;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#include"><span class="nav-number">1.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-1"><span class="nav-number">2.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-2"><span class="nav-number">3.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-3"><span class="nav-number">4.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-4"><span class="nav-number">5.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-5"><span class="nav-number">6.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-6"><span class="nav-number">7.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-7"><span class="nav-number">8.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-8"><span class="nav-number">9.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#define-pii-pair"><span class="nav-number">10.</span> <span class="nav-text">define pii pair</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#define-mk-make-pair"><span class="nav-number">11.</span> <span class="nav-text">define mk make_pair</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#include"><span class="nav-number">1.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#define-pii-pair"><span class="nav-number">2.</span> <span class="nav-text">define pii pair</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#define-mk-make-pair"><span class="nav-number">3.</span> <span class="nav-text">define mk make_pair</span></a></li></ol></div>
             
 
           </div>
@@ -602,7 +602,7 @@ return 0;
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

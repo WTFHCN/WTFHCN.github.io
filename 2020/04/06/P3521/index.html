@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="NaCNer">
 <meta property="og:description" content="给一棵$n(1≤n≤200000)$个叶子的二叉树，可以交换每个点的左右子树，要求前序遍历叶子的逆序对最少。">
 <meta property="article:published_time" content="2020-04-06T02:47:00.000Z">
-<meta property="article:modified_time" content="2020-04-25T07:59:13.489Z">
+<meta property="article:modified_time" content="2021-01-04T13:04:36.350Z">
 <meta property="article:author" content="HCN">
 <meta property="article:tag" content="线段树合并">
 <meta name="twitter:card" content="summary">
@@ -311,7 +311,7 @@
 <p>如何选择交换左右子树。考虑在合并的时候若不交换，则贡献为右子树的$[l,mid]$的数量$\times$,左子树$[mid+1,r]$。交换则反之，这一步可以在合并的过程中实现。</p>
 <p><details><br>  <summary>代码</summary></p>
 <p>```c++</p>
-<h1 id="include"><a href="#include" class="headerlink" title="include "></a>include <iostream></h1><h1 id="include-1"><a href="#include-1" class="headerlink" title="include "></a>include <cstdio></h1><h1 id="include-2"><a href="#include-2" class="headerlink" title="include "></a>include <algorithm></h1><h1 id="include-3"><a href="#include-3" class="headerlink" title="include "></a>include <queue></h1><h1 id="include-4"><a href="#include-4" class="headerlink" title="include "></a>include <cmath></h1><h1 id="include-5"><a href="#include-5" class="headerlink" title="include "></a>include <cstring></h1><h1 id="include-6"><a href="#include-6" class="headerlink" title="include "></a>include <vector></h1><h1 id="include-7"><a href="#include-7" class="headerlink" title="include "></a>include <map></h1><h1 id="include-8"><a href="#include-8" class="headerlink" title="include "></a>include <stack></h1><p>using namespace std;<br>typedef long long ll;</p>
+<h1 id="include"><a href="#include" class="headerlink" title="include "></a>include <bits/stdc++.h></h1><p>using namespace std;<br>typedef long long ll;</p>
 <h1 id="define-pii-pair"><a href="#define-pii-pair" class="headerlink" title="define pii pair"></a>define pii pair<int, int></h1><h1 id="define-ls-tree-pos-l"><a href="#define-ls-tree-pos-l" class="headerlink" title="define ls tree[pos].l"></a>define ls tree[pos].l</h1><h1 id="define-rs-tree-pos-r"><a href="#define-rs-tree-pos-r" class="headerlink" title="define rs tree[pos].r"></a>define rs tree[pos].r</h1><h1 id="define-mk-make-pair"><a href="#define-mk-make-pair" class="headerlink" title="define mk make_pair"></a>define mk make_pair</h1><p>const int N = 1e6 + 10;<br>const int mod = 1e9 + 7;</p>
 <p>int scnt, rt[N];</p>
 <p>ll ans1, ans2;<br>ll ans;<br>struct seg<br>{<br>    int l, r, sum;<br>} tree[N <em> 20];<br>void pushup(int pos)<br>{<br>    tree[pos].sum = tree[ls].sum + tree[rs].sum;<br>}<br>void modify(int &amp;pos, int l, int r, int v)<br>{<br>    if (!pos)<br>        pos = ++scnt;<br>    if (l == r)<br>    {<br>        tree[pos].sum++;<br>        return;<br>    }<br>    int mid = (l + r) &gt;&gt; 1;<br>    if (v &lt;= mid)<br>        modify(ls, l, mid, v);<br>    else<br>        modify(rs, mid + 1, r, v);<br>    pushup(pos);<br>}<br>int merge(int u, int v, int l, int r)<br>{<br>    if (!u || !v)<br>        return u + v;<br>    int pos = ++scnt;<br>    if (l == r)<br>    {<br>        tree[pos].sum = tree[u].sum + tree[v].sum;<br>        return pos;<br>    }<br>    int mid = (l + r) &gt;&gt; 1;<br>    ans1 += 1ll </em> tree[tree[u].l].sum <em> tree[tree[v].r].sum;<br>    ans2 += 1ll </em> tree[tree[u].r].sum * tree[tree[v].l].sum;<br>    ls = merge(tree[u].l, tree[v].l, l, mid);<br>    rs = merge(tree[u].r, tree[v].r, mid + 1, r);<br>    pushup(pos);<br>    return pos;<br>}<br>int n;</p>
@@ -443,7 +443,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">269</span>
+                  <span class="site-state-item-count">270</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -526,7 +526,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#include"><span class="nav-number">1.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-1"><span class="nav-number">2.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-2"><span class="nav-number">3.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-3"><span class="nav-number">4.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-4"><span class="nav-number">5.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-5"><span class="nav-number">6.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-6"><span class="nav-number">7.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-7"><span class="nav-number">8.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-8"><span class="nav-number">9.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#define-pii-pair"><span class="nav-number">10.</span> <span class="nav-text">define pii pair</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#define-ls-tree-pos-l"><span class="nav-number">11.</span> <span class="nav-text">define ls tree[pos].l</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#define-rs-tree-pos-r"><span class="nav-number">12.</span> <span class="nav-text">define rs tree[pos].r</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#define-mk-make-pair"><span class="nav-number">13.</span> <span class="nav-text">define mk make_pair</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#include"><span class="nav-number">1.</span> <span class="nav-text">include </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#define-pii-pair"><span class="nav-number">2.</span> <span class="nav-text">define pii pair</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#define-ls-tree-pos-l"><span class="nav-number">3.</span> <span class="nav-text">define ls tree[pos].l</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#define-rs-tree-pos-r"><span class="nav-number">4.</span> <span class="nav-text">define rs tree[pos].r</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#define-mk-make-pair"><span class="nav-number">5.</span> <span class="nav-text">define mk make_pair</span></a></li></ol></div>
             
 
           </div>
@@ -546,7 +546,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
